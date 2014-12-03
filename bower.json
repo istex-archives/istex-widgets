@@ -1,0 +1,17 @@
+{
+  "name": "istex-widget",
+  "version": "1.0.0",
+  "homepage": "https://github.com/istex/widget.istex.fr",
+  "authors": [],
+  "description": "Widgets istex",
+  "license": "CeCILL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "devDependencies": {
+    "less": "~2.1.1"
+  }
+}
