@@ -22,9 +22,10 @@ var imagemin   = require('gulp-imagemin');
 var jsmin      = require('gulp-jsmin');
 var rename     = require('gulp-rename');
 var es         = require('event-stream');
+var bower      = require('gulp-bower');
 
 // default task
-gulp.task("default", [ "themes", "scripts" ], function () {
+gulp.task("default", [ "themes", "scripts", "bower" ], function () {
 
 });
 
@@ -189,4 +190,13 @@ gulp.task('js', [ 'js-all-in-one' ], function () {
     );    
   });
   return es.concat.apply(null, gulpSubTask);
+});
+
+/**
+ * Install bower dependencies
+ * ex: lesscss, jquery ...
+ */
+gulp.task('bower', function () {
+  return bower()
+    .pipe(gulp.dest('bower_components/'));
 });
