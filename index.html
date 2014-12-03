@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Démonstration d'utilisation des widgets ISTEX</title>
+
+        <!-- jQuery est une dépendances nécessaire -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+        <!-- on ne charge que le widget search
+        <script type="text/javascript" src="/search/js/script.js"></script>
+        <link rel="stylesheet" href="/search/themes/default/style.css" />
+        -->
+
+        <script type="text/javascript" src="/js/widgets.min.js"></script>
+        <link rel="stylesheet" href="/themes/default/widgets.min.css" />
+
+    </head>
+    <body>
+
+        <h1>Exemple d'utilisation des widgets ISTEX</h1>
+        
+        <div id="istex-widget-search"></div>
+        <div id="istex-widget-facets"></div>
+        <div id="istex-widget-results"></div>
+        <script type="text/javascript">
+            $('#istex-widget-search').istexSearch({ query: 'brain' });
+            $('#istex-widget-facets').istexFacets({ corpus: ['springer', 'elsevier'] });
+            $('#istex-widget-results').istexResults('results');
+        </script>
+
+    </body>
+</html>
