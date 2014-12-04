@@ -205,11 +205,11 @@ gulp.task('bower', function () {
 /**
  * Run tests
  */
-gulp.task('test', [ 'bower', 'mocha' ], function () {
+gulp.task('test', [ 'mocha' ], function () {
 });
 
 var mocha = require('gulp-mocha');
-gulp.task('mocha', function () {
+gulp.task('mocha', [ 'bower' ], function () {
     return gulp.src([ 'test/*.spec.js' ], { read: false })
       .pipe(mocha())
       .once('end', function () {
