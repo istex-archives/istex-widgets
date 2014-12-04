@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/istex/widget.istex.fr",
   "devDependencies": {
+    "chai": "^1.10.0",
     "event-stream": "^3.1.7",
     "gulp": "^3.8.10",
     "gulp-bower": "0.0.7",
