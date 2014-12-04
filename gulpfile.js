@@ -200,3 +200,19 @@ gulp.task('bower', function () {
   return bower()
     .pipe(gulp.dest('bower_components/'));
 });
+
+
+/**
+ * Run tests
+ */
+gulp.task('test', [ 'mocha' ], function () {
+});
+
+var mocha = require('gulp-mocha');
+gulp.task('mocha', function () {
+    return gulp.src([ 'test/*.spec.js' ], { read: false })
+      .pipe(mocha())
+      .once('end', function () {
+        process.exit();
+      });
+});

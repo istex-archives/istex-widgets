@@ -25,7 +25,7 @@ describe('Istex search widget', function () {
     assert.equal(this.browser.text('h1'), "istexSearch test");
 
     // todo ... ajouter tests sur l'élément input inséré par le widget
-    
+    //assert.ok(false);    
   });
 
   it('should show a "Search" button');
