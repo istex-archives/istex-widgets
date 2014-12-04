@@ -22,13 +22,16 @@ describe('Istex search widget', function () {
 
   it('should show an input query form', function () {
     assert.ok(this.browser.success);
-    assert.equal(this.browser.text('h1'), "istexSearch test");
-
-    // todo ... ajouter tests sur l'élément input inséré par le widget
-    //assert.ok(false);    
+    assert.ok(this.browser.query('input.istex-search-input'));
+    assert.equal(this.browser.query('input.istex-search-input').type, 'text');
   });
 
-  it('should show a "Search" button');
+  it('should show a "Search" button', function () {
+    assert.ok(this.browser.success);
+    assert.ok(this.browser.query('input.istex-search-submit'));
+    assert.equal(this.browser.query('input.istex-search-submit').type, 'submit');    
+  });
+
   it('should receive data when the query is submitted');
   
   after(function () {

@@ -8,12 +8,13 @@
 
   var pluginName = "istexSearch";
   var defaults = {
+    istexApi: 'https://api.istex.fr',
     query: ""
   };
 
   // The actual plugin constructor
   function Plugin(element, options) {
-    this.element = element;
+    this.elt = element;
     this.settings = $.extend({}, defaults, options);
     this._defaults = defaults;
     this._name = pluginName;
@@ -21,7 +22,36 @@
   }
 
   Plugin.prototype.init = function () {
-    console.log(this.element);
+    var self = this;
+
+    // insert the form search into the DOM
+    $(self.elt).append(
+      '<form class="istex-search-form">' +
+        '<input class="istex-search-input" type="text" value="" />' +
+        '<input class="istex-search-submit" type="submit" value="Rechercher" />' +
+        '<p class="istex-search-error"></p>' +
+      '</form>'
+    );
+
+    // connect the submit action
+    $(self.elt).find('.istex-search-form').submit(function () {
+
+      $.ajax({
+        url: self.settings.istexApi + '/document/',
+        data: { q: 'brain' },
+        dataType: 'jsonp'
+      }).done(function (items) {
+        // forward the results as a DOM event
+        $(self.elt).trigger('istex-results', [ self, items ]);
+        // forward the results as a global event
+        $.event.trigger('istex-results', [ self, items ]);
+      }).fail(function (err) {
+        $(self.elt).find('.istex-search-error').text(err);
+      });
+
+      return false;
+    });
+
   };
 
   // A really lightweight plugin wrapper around the constructor,
