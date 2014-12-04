@@ -205,7 +205,7 @@ gulp.task('bower', function () {
 /**
  * Run tests
  */
-gulp.task('test', [ 'mocha' ], function () {
+gulp.task('test', [ 'bower', 'mocha' ], function () {
 });
 
 var mocha = require('gulp-mocha');
