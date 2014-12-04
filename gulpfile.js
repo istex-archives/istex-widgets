@@ -216,3 +216,17 @@ gulp.task('mocha', [ 'bower' ], function () {
         process.exit();
       });
 });
+
+/**
+ * Start a http server for debugging
+ */
+var httpServer = require('http-server');
+gulp.task('http', [ 'bower' ], function () {
+  var server = httpServer.createServer({
+    root: __dirname
+  });
+  server.listen(8080, '127.0.0.1', function () {
+    console.log('Listening on http://127.0.0.1:8080/index.html');
+    console.log('Listening on http://127.0.0.1:8080/test/search.html');
+  });
+});
