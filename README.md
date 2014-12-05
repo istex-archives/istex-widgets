@@ -16,8 +16,8 @@ Exemple d'utilisation du widget :
     
     <!-- ... -->
     
-    <script type="text/javascript" src="http://istex.github.io/search/js/script.js"></script>
-    <link rel="stylesheet" href="http://istex.github.io/search/themes/default/style.css" />
+    <script type="text/javascript" src="http://istex.github.io/search/js/script.min.js"></script>
+    <link rel="stylesheet" href="http://istex.github.io/search/themes/default/style.min.css" />
     
     <!-- ... -->
 
