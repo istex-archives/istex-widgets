@@ -24,16 +24,20 @@
   Plugin.prototype.init = function () {
     var self = this;
 
+    /*jshint ignore:start*/
     // insert the form search into the DOM
     $(self.elt).append(
       '<form class="istex-search-form">' +
         '<div class="istex-search-bar-wrapper">' +
           '<input class="istex-search-submit" type="submit" value="Rechercher" />' +
-          '<span><input class="istex-search-input" type="text" value="" placeholder="Votre requête ici ..." /></span>' +
+          '<span>' +
+            '<input class="istex-search-input" type="text" value="" placeholder="Votre requête ici ..." />' +
+          '</span>' +
         '</div>' +
         '<p class="istex-search-error">error ajax</p>' +
       '</form>'
     );
+    /*jshint ignore:end*/
 
     // connect the submit action
     $(self.elt).find('.istex-search-form').submit(function () {
