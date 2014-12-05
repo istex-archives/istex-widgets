@@ -27,9 +27,11 @@
     // insert the form search into the DOM
     $(self.elt).append(
       '<form class="istex-search-form">' +
-        '<input class="istex-search-input" type="text" value="" />' +
-        '<input class="istex-search-submit" type="submit" value="Rechercher" />' +
-        '<p class="istex-search-error"></p>' +
+        '<div class="istex-search-bar-wrapper">' +
+          '<input class="istex-search-submit" type="submit" value="Rechercher" />' +
+          '<span><input class="istex-search-input" type="text" value="" placeholder="Votre requête ici ..." /></span>' +
+        '</div>' +
+        '<p class="istex-search-error">error ajax</p>' +
       '</form>'
     );
 
@@ -38,7 +40,7 @@
 
       $.ajax({
         url: self.settings.istexApi + '/document/',
-        data: { q: 'brain' },
+        data: { q: $(self.elt).find('input.istex-search-input').val() },
         dataType: 'jsonp'
       }).done(function (items) {
         // forward the results as a DOM event

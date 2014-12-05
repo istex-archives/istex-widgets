@@ -1,7 +1,39 @@
-div {
-  color: blue;
-  background-image: url(idea.png)
-}
-body {
-  color: pink;
+.istex-search-form {
+  padding: 0; margin: 0;
+  
+  span {
+    display: block;
+    overflow: hidden;
+    padding: 0 0px;
+    input.istex-search-input {
+      padding: 0; margin: 0;
+      width: 100%;
+
+      background-image: url(search-logo.png);
+      background-size: auto 60%;
+      background-repeat: no-repeat;
+      background-position: right;
+
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box
+    }
+  }
+
+  input.istex-search-submit {
+    float: right;
+    padding: 0; margin: 0;
+    margin-left: 5px;
+
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box
+  }
+
+  p.istex-search-error {
+    padding: 0; margin: 0;
+    margin-top: 5px;
+    color: #FF5C05;
+    font-family: monospace;
+  }
 }
