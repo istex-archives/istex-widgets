@@ -44,7 +44,7 @@
 
     // connect the submit action
     $(self.elt).find('.istex-search-form').submit(function () {
-
+      // send the request to the istex api
       $.ajax({
         url: self.settings.istexApi + '/document/',
         data: { q: $(self.elt).find('input.istex-search-input').val() },
