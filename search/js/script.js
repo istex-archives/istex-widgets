@@ -39,6 +39,9 @@
     );
     /*jshint ignore:end*/
 
+    // initialize query parameter
+    $(self.elt).find('.istex-search-input').val(self.settings.query);
+
     // connect the submit action
     $(self.elt).find('.istex-search-form').submit(function () {
 
