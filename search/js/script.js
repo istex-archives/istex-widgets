@@ -2,7 +2,7 @@
 'use strict';
 
 /**
- * Widget ISTEX
+ * Widget istexSearch
  */
 ;(function ($, window, document, undefined) {
 
