@@ -152,18 +152,22 @@ gulp.task('js-all-in-one', function () {
 
   // copy not minified version
   gulpSubTask.push(
-    gulp.src(widgets.map(function (w) {
-      return './' + w + '/js/script.js';
-    })).pipe(concat('widgets.js'))
+    gulp.src([ './bower_components/jquery-jsonp/src/jquery.jsonp.js' ].concat(
+      widgets.map(function (w) {
+        return './' + w + '/js/script.js';
+      })
+     )).pipe(concat('widgets.js'))
        .pipe(stripDebug())
        .pipe(gulp.dest('./dist/js/'))
   );
 
   // minify js one by one
   gulpSubTask.push(
-    gulp.src(widgets.map(function (w) {
-      return './' + w + '/js/script.js';
-    })).pipe(concat('widgets.min.js'))
+    gulp.src([ './bower_components/jquery-jsonp/src/jquery.jsonp.js' ].concat(
+      widgets.map(function (w) {
+        return './' + w + '/js/script.js';
+      })
+     )).pipe(concat('widgets.min.js'))
        .pipe(stripDebug())
        .pipe(uglify())
        .pipe(gulp.dest('./dist/js/'))
