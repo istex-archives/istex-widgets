@@ -34,7 +34,7 @@
             '<input class="istex-search-input" type="text" value="" placeholder="Votre requête ici ..." />' +
           '</span>' +
         '</div>' +
-        '<p class="istex-search-error">error ajax</p>' +
+        '<p class="istex-search-error">error</p>' +
       '</form>'
     );
     /*jshint ignore:end*/
@@ -44,18 +44,26 @@
 
     // connect the submit action
     $(self.elt).find('.istex-search-form').submit(function () {
-      // send the request to the istex api
-      $.ajax({
+
+      // send the request to the istex api with the
+      // jquery-jsonp lib because errors are not
+      // handled by the native jquery jsonp function
+      $.jsonp({
         url: self.settings.istexApi + '/document/',
         data: { q: $(self.elt).find('input.istex-search-input').val() },
-        dataType: 'jsonp'
-      }).done(function (items) {
-        // forward the results as a DOM event
-        $(self.elt).trigger('istex-results', [ self, items ]);
-        // forward the results as a global event
-        $.event.trigger('istex-results', [ self, items ]);
-      }).fail(function (err) {
-        $(self.elt).find('.istex-search-error').text(err);
+        callbackParameter: "callback",
+        success: function(items) {
+          // hide the error box
+          $(self.elt).find('.istex-search-error').show();
+          // forward the results as a DOM event
+          $(self.elt).trigger('istex-results', [ self, items ]);
+          // forward the results as a global event
+          $.event.trigger('istex-results', [ self, items ]);
+        },
+        error: function (err, err2, err3) {
+          $(self.elt).find('.istex-search-error').html('<a href="https://api.istex.fr/document/?q=*">API Istex</a> non joignable.');
+          $(self.elt).find('.istex-search-error').show();
+        }
       });
 
       return false;
