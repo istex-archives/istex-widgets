@@ -54,13 +54,13 @@
         callbackParameter: "callback",
         success: function(items) {
           // hide the error box
-          $(self.elt).find('.istex-search-error').show();
+          $(self.elt).find('.istex-search-error').hide();
           // forward the results as a DOM event
           $(self.elt).trigger('istex-results', [ self, items ]);
           // forward the results as a global event
           $.event.trigger('istex-results', [ self, items ]);
         },
-        error: function (err, err2, err3) {
+        error: function (opt, err) {
           $(self.elt).find('.istex-search-error').html('<a href="https://api.istex.fr/document/?q=*">API Istex</a> non joignable.');
           $(self.elt).find('.istex-search-error').show();
         }
