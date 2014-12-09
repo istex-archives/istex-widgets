@@ -63,11 +63,11 @@ Vous êtes alors opérationels pour développer votre contribution.
 
 ### Tester, compiler et déployer
 
-Pour tester les widgets avec votre navigateur Web, le plus simple est de procéder de la manière suivante :
+Pour développer et tester les widgets depuis votre navigateur Web, le plus simple est de lancer un mini serveur Web avec la commande suivante :
 ```
 gulp http
 ```
-Puis ouvrir les URL qui s'affichent dans votre navigateur. Exemple: http://127.0.0.1:8080/index.html pour une vue d'ensemble.
+Puis ouvrez les URL qui s'affichent dans votre navigateur. Exemple: http://127.0.0.1:8080/index.html pour une vue d'ensemble.
 
 Les tests unitaires se trouvent dans le répertoire ''./test/'' (le [framework mocha](http://mochajs.org/) est utilisé), pour les exécuter, tapez :
 ```
