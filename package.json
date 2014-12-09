@@ -36,5 +36,8 @@
     "mocha": "^2.0.1",
     "mocha-jshint": "0.0.9",
     "zombie": "^2.4.0"
+  },
+  "dependencies": {
+    "gulp-clean": "^0.3.1"
   }
 }

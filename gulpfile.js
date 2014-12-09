@@ -22,7 +22,7 @@ var imagemin   = require('gulp-imagemin');
 var jsmin      = require('gulp-jsmin');
 var rename     = require('gulp-rename');
 var bower      = require('gulp-bower');
-var rimraf     = require('gulp-rimraf');
+var clean      = require('gulp-clean');
 var es         = require('event-stream');
 
 // default task
@@ -44,7 +44,7 @@ gulp.task('scripts', [
  * Loop over every widgets and themes
  * theme convert less to css and minify it
  */
-gulp.task('css', function () {
+gulp.task('css', [ "clean" ], function () {
   var gulpSubTask = [];
 
   // not minified
@@ -108,7 +108,7 @@ gulp.task('css-all-in-one', [ 'css' ], function () {
 /**
  * Optimize and copy widgets theme images
  */
-gulp.task('images', function() {
+gulp.task('images', [ "clean" ], function() {
   var gulpSubTask = [];
   widgets.forEach(function (widget) {
     themes.forEach(function (theme) {
@@ -143,7 +143,7 @@ gulp.task('images-all-in-one', [ 'images' ], function() {
 
 // concatenate every js a single on
 // used for all in one widgets
-gulp.task('js-all-in-one', function () {
+gulp.task('js-all-in-one', [ "clean" ], function () {
 
   var gulpSubTask = [];
 
@@ -239,7 +239,10 @@ gulp.task('http', [ 'bower' ], function () {
 gulp.task('clean', function () {
   return gulp.src([
       './dist/*',
-      '!./dist/index.html'
+      '!./dist/.git/**',
+      '!./dist/index.html',
+      '!./dist/bower.json',
+      '!./dist/bower_components/**',
     ], { read: false })
-    .pipe(rimraf());
+    .pipe(clean());
 });
