@@ -33,3 +33,46 @@ Exemple d'utilisation du widget :
 </html>
 ```
 
+## Développeurs
+
+### Installation d'un environnement de développement
+
+Voici les étapes permettant de mettre en place une environnement de développement :
+
+Installer NodeJS et npm (exemple sous Linux avec l'outil [nvm](https://github.com/creationix/nvm)) :
+```bash
+curl https://raw.githubusercontent.com/creationix/nvm/v0.20.0/install.sh | bash
+nvm install 0.10
+nvm use 0.10
+```
+
+Récupérer le dépôt git des widgets Istex :
+```bash
+git clone git@github.com:istex/widget.istex.fr.git
+```
+
+Initialiser les dépendances (gulp est l'outil de build) :
+```bash
+cd widget.istex.fr/
+npm install
+npm install -g gulp
+gulp init
+```
+
+Vous êtes alors opérationels pour développer votre contribution.
+
+### Tester, compiler et déployer
+
+Les tests unitaires se trouvent dans le répertoire ''./test/'', pour les exécuter, tapez :
+```bash
+gulp mocha
+```
+
+Pour compiler les widgets vers le répertoire ''./dist/'', tapez :
+```bash
+gulp build
+```
+Pour déployer les widgets sur le site [istex.github.io](http://istex.github.io/) ([dépôt git](https://github.com/istex/istex.github.io)), tapez :
+```bash
+gulp deploy
+```
