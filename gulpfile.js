@@ -28,13 +28,14 @@ var es         = require('event-stream');
 
 // default task: build everything
 gulp.task("default", [ "build" ]);
+
+// build and deploy
 gulp.task("build", [ "clean-dist", "themes", "scripts", "bower" ]);
+gulp.task("deploy",  [ "push-dist" ]);
 
 // init task: prepare environment
 gulp.task("init",    [ "clone-dist", "bower" ]);
 
-// deploy task: prepare environment
-gulp.task("deploy",  [ "push-dist" ]);
 
 gulp.task('themes', [
   'css',
