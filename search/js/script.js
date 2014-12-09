@@ -53,6 +53,7 @@
         data: { q: $(self.elt).find('input.istex-search-input').val() },
         callbackParameter: "callback",
         success: function(items) {
+          console.log(items);
           // hide the error box
           $(self.elt).find('.istex-search-error').hide();
           // forward the results as a DOM event
