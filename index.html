@@ -12,11 +12,11 @@
         <script type="text/javascript" src="/search/js/script.js"></script>
         <link rel="stylesheet/less" type="text/css" href="/search/themes/default/style.less" />
 
-        <!-- charge tous les widgets 
-        <script type="text/javascript" src="/dist/js/widgets.min.js"></script>
-        <link rel="stylesheet" href="/dist/themes/default/widgets.min.css" />
-        -->
+        <!-- Charge le widget istexResults -->
+        <script type="text/javascript" src="/results/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/results/themes/default/style.less" />
 
+        <!-- Compilation des LESS en CSS (pour le développement) -->
         <script> var less = { env: "development", async: true }; </script>
         <script type="text/javascript" src="/bower_components/less/dist/less.min.js"></script>
 
@@ -36,7 +36,7 @@
         <script type="text/javascript">
             $('#istex-widget-search').istexSearch({ query: 'brain' });
             // $('#istex-widget-facets').istexFacets({ corpus: ['springer', 'elsevier'] });
-            // $('#istex-widget-results').istexResults('results');
+            $('#istex-widget-results').istexResults();
         </script>
 
     </body>
