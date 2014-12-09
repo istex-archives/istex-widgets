@@ -14,19 +14,25 @@ Exemple d'utilisation du widget :
 <html>
   <head>
     
-    <!-- ... -->
+    <!-- jQuery est une dépendance nécessaire -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     
-    <script type="text/javascript" src="http://istex.github.io/search/js/script.min.js"></script>
-    <link rel="stylesheet" href="http://istex.github.io/search/themes/default/style.min.css" />
-    
-    <!-- ... -->
+    <!-- Charge les widgets Istex -->
+    <script type="text/javascript" src="//istex.github.io/js/widgets.min.js"></script>
+    <link rel="stylesheet" href="//istex.github.io/themes/default/widgets.min.css" />
+
+    <style>
+      #istex-widget-search {
+          width: 600px;
+      }
+    </style>
 
   </head>
   <body>
 
     <div id="istex-widget-search"></div>
     <script type="text/javascript">
-        $('#istex-widget-search').istexSearch({ query: 'brain' });
+        $('#istex-widget-search').istexSearch();
     </script>
 
   </body>
