@@ -45,12 +45,15 @@
     // connect the submit action
     $(self.elt).find('.istex-search-form').submit(function () {
 
+      var query = $(self.elt).find('input.istex-search-input').val().trim();
+      query = query ? query : '*';
+
       // send the request to the istex api with the
       // jquery-jsonp lib because errors are not
       // handled by the native jquery jsonp function
       $.jsonp({
         url: self.settings.istexApi + '/document/',
-        data: { q: $(self.elt).find('input.istex-search-input').val() },
+        data: { q: query },
         callbackParameter: "callback",
         success: function(items) {
           console.log(items);
