@@ -21,27 +21,24 @@ var stripDebug = require('gulp-strip-debug');
 var imagemin   = require('gulp-imagemin');
 var jsmin      = require('gulp-jsmin');
 var rename     = require('gulp-rename');
-var es         = require('event-stream');
 var bower      = require('gulp-bower');
+var rimraf     = require('gulp-rimraf');
+var es         = require('event-stream');
 
 // default task
-gulp.task("default", [ "themes", "scripts", "bower" ], function () {
-
-});
+gulp.task("default", [ "clean", "themes", "scripts", "bower" ]);
 
 gulp.task('themes', [
-          'css',
-          'css-all-in-one',
-          'images',
-          'images-all-in-one'
-        ], function () {
-});
+  'css',
+  'css-all-in-one',
+  'images',
+  'images-all-in-one'
+]);
 
 gulp.task('scripts', [
-          'js',
-          'js-all-in-one',
-        ], function () {
-});
+  'js',
+  'js-all-in-one',
+]);
 
 /**
  * Loop over every widgets and themes
@@ -233,4 +230,16 @@ gulp.task('http', [ 'bower' ], function () {
     console.log('Listening on http://127.0.0.1:8080/index.html');
     console.log('Listening on http://127.0.0.1:8080/test/search.html');
   });
+});
+
+/**
+ * Clean dist folder
+ * ignoring index.html (committed on git)
+ */
+gulp.task('clean', function () {
+  return gulp.src([
+      './dist/*',
+      '!./dist/index.html'
+    ], { read: false })
+    .pipe(rimraf());
 });
