@@ -63,9 +63,9 @@ Vous êtes alors opérationels pour développer votre contribution.
 
 ### Tester, compiler et déployer
 
-Les tests unitaires se trouvent dans le répertoire ''./test/'', pour les exécuter, tapez :
+Les tests unitaires se trouvent dans le répertoire ''./test/'' (le [framework mocha](http://mochajs.org/) est utilisé), pour les exécuter, tapez :
 ```bash
-gulp mocha
+gulp test
 ```
 
 Pour compiler les widgets vers le répertoire ''./dist/'', tapez :
