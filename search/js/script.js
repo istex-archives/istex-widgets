@@ -27,7 +27,7 @@
     /*jshint ignore:start*/
     // insert the form search into the DOM
     $(self.elt).append(
-      '<form class="istex-search-form">' +
+      ' <form class="istex-search-form">' +
         '<div class="istex-search-bar-wrapper">' +
           '<input class="istex-search-submit" type="submit" value="Rechercher" />' +
           '<span>' +
