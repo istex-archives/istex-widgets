@@ -23,10 +23,18 @@ var jsmin      = require('gulp-jsmin');
 var rename     = require('gulp-rename');
 var bower      = require('gulp-bower');
 var clean      = require('gulp-clean');
+var git        = require('gulp-git');
 var es         = require('event-stream');
 
-// default task
-gulp.task("default", [ "clean", "themes", "scripts", "bower" ]);
+// default task: build everything
+gulp.task("default", [ "build" ]);
+gulp.task("build", [ "clean-dist", "themes", "scripts", "bower" ]);
+
+// init task: prepare environment
+gulp.task("init",    [ "clone-dist", "bower" ]);
+
+// deploy task: prepare environment
+gulp.task("deploy",  [ "push-dist" ]);
 
 gulp.task('themes', [
   'css',
@@ -44,7 +52,7 @@ gulp.task('scripts', [
  * Loop over every widgets and themes
  * theme convert less to css and minify it
  */
-gulp.task('css', [ "clean" ], function () {
+gulp.task('css', [ "clean-dist" ], function () {
   var gulpSubTask = [];
 
   // not minified
@@ -108,7 +116,7 @@ gulp.task('css-all-in-one', [ 'css' ], function () {
 /**
  * Optimize and copy widgets theme images
  */
-gulp.task('images', [ "clean" ], function() {
+gulp.task('images', [ "clean-dist" ], function() {
   var gulpSubTask = [];
   widgets.forEach(function (widget) {
     themes.forEach(function (theme) {
@@ -143,7 +151,7 @@ gulp.task('images-all-in-one', [ 'images' ], function() {
 
 // concatenate every js a single on
 // used for all in one widgets
-gulp.task('js-all-in-one', [ "clean" ], function () {
+gulp.task('js-all-in-one', [ "clean-dist" ], function () {
 
   var gulpSubTask = [];
 
@@ -236,13 +244,39 @@ gulp.task('http', [ 'bower' ], function () {
  * Clean dist folder
  * ignoring index.html (committed on git)
  */
-gulp.task('clean', function () {
+gulp.task('clean-dist', function () {
   return gulp.src([
       './dist/*',
-      '!./dist/.git/**',
+      '!./dist/.git/',
       '!./dist/index.html',
       '!./dist/bower.json',
-      '!./dist/bower_components/**',
+      '!./dist/bower_components/',
     ], { read: false })
     .pipe(clean());
+});
+
+/**
+ * Clone the dist directory from istex.github.io
+ */
+gulp.task('clone-dist', function () {
+  git.clone('git@github.com:istex/istex.github.io.git', { args: 'dist' }, function (err) {
+    if (err) throw err;
+  });
+});
+
+/**
+ * Commit and push the dist directory to istex.github.io
+ */
+gulp.task('commit-dist', function () {
+  return gulp.src('./dist/*')
+    .pipe(git.commit('update dist', { cwd: './dist' }))
+    .on('error', function errorHandler (err) {
+      console.log('Error because nothing to commit: ', err);
+      this.emit('end');
+    });
+});
+gulp.task('push-dist', [ 'commit-dist' ], function () {
+  git.push('origin', 'master', { cwd: './dist' }, function (err) {
+    if (err) throw err;
+  });
 });
