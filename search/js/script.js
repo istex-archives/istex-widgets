@@ -9,7 +9,8 @@
   var pluginName = "istexSearch";
   var defaults = {
     istexApi: 'https://api.istex.fr',
-    query: ""
+    query: "",
+    resultsEventName: "istex-results"
   };
 
   // The actual plugin constructor
@@ -56,13 +57,10 @@
         data: { q: query },
         callbackParameter: "callback",
         success: function(items) {
-          console.log(items);
           // hide the error box
           $(self.elt).find('.istex-search-error').hide();
-          // forward the results as a DOM event
-          $(self.elt).trigger('istex-results', [ self, items ]);
           // forward the results as a global event
-          $.event.trigger('istex-results', [ self, items ]);
+          $.event.trigger(self.settings.resultsEventName, [ items, self ]);
         },
         error: function (opt, err) {
           $(self.elt).find('.istex-search-error').html(
