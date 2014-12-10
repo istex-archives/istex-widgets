@@ -1,0 +1,92 @@
+// statistiques about the request
+div.istex-results-items-stats {
+  padding: 0; margin: 0;
+  line-height: 30px;
+  font-size: small;
+  color: #808080;
+}
+
+// results container
+ol.istex-results-items {
+  padding: 0; margin: 0;
+  list-style-type: none;
+
+  li.istex-results-item {
+    padding: 0; margin: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  
+    // document title
+    a.istex-results-item-title {
+      padding: 0; margin: 0;
+      font-size: 100%;
+      font-weight: bold;
+      text-decoration: none;
+      color: #478DA7;
+    }
+    
+    // document abstract (~200 caracteres)
+    p.istex-results-item-abstract {
+      padding: 0; margin: 0;
+      margin-top: 4px;
+      font-size: 80%;
+      font-weight: lighter;
+      text-decoration: none;
+      text-align: justify;
+      color: #000;
+    }
+
+    // document's corpus
+    div.istex-results-item-corpus {
+      padding: 2px; margin: 0;
+      margin-top: 8px;
+      font-size: 90%;
+      height: 16px;
+      vertical-align: middle;
+      font-family: monospace;
+      float: right;
+      background-color: #B2C32E; //#C3D633;
+      color: #FFF;
+      font-weight: bold;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+    }
+
+    // document download links
+    ul.istex-results-item-download {
+      padding: 0; margin: 0;
+      list-style-type: none;
+      li.istex-results-item-dl {
+        padding: 0; margin: 0;
+        margin-top: 8px;
+        a {
+          padding: 2px; margin: 0;
+          margin-right: 2px;
+          display: inline-block;
+          height: 16px;
+          width: 16px;
+          float: left;
+          -webkit-border-radius: 3px;
+          -moz-border-radius: 3px;
+          border-radius: 3px;
+        }
+        a.istex-results-item-dl-pdf {
+          background-image: url(istex-results-item-dl-pdf.png);
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+        }
+        a.istex-results-item-dl-mods {
+          background-image: url(istex-results-item-dl-mods.png);
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+        }
+      }
+    }
+
+    // wrapper to stop the floating element
+    div.istex-results-item-bottom {
+      clear: both;
+    }
+  }
+}
