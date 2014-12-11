@@ -33,7 +33,7 @@
         <div id="istex-results-in-dom"></div>
         <script type="text/javascript">
             //$("#istex-results-in-dom").hide();
-            $(document).bind('istex-results', function (event, plugin, items) {
+            $(document).bind('istex-results', function (event, items) {
                 $("#istex-results-in-dom").text(JSON.stringify(items));
             });
         </script>
