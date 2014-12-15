@@ -4,11 +4,14 @@ Widgets ISTEX (search, results, facets) permettant de créer rapidement des inte
 
 [![Build Status](https://travis-ci.org/istex/widget.istex.fr.svg?branch=master)](https://travis-ci.org/istex/widget.istex.fr)
 
-## Widget search
+## Usage classique des widgets
 
-Ce widget permet d'insérer dans la page HTML une zone de saisie ainsi qu'un bouton de recherche. Lorsqu'une suite de mots sont tapés puis que le bouton rechercher est pressé, l'API Istex est interrogée à travers des requêtes AJAX. Une fois les résultats reçus, ils sont propagés aux widgets results et facets mais également à l'ensemble du DOM sous la forme d'un événement javascript.
+Exemple d'utilisation classique des widgets search et results. Il est nécessaire dans un premier temps de charger les fichiers JS et CSS des widgets Istex (head de la page HTML) ainsi que la librairie jQuery qui est une dépendance nécessaire.
 
-Exemple d'utilisation du widget :
+Ensuite vous pouvez placer  deux éléments (zone de recherche & zone de résultats) où vous le souhaitez dans votre page HTML.
+Finalement il reste à exécuter les deux plugins (un par widget) sur ces deux éléments.
+
+Voici ce que ca peut donner sur une page quasi vierge :
 
 ```html
 <html>
@@ -22,7 +25,7 @@ Exemple d'utilisation du widget :
     <link rel="stylesheet" href="//istex.github.io/themes/default/widgets.min.css" />
 
     <style>
-      #istex-widget-search {
+      #istex-widget-search, #istex-widget-results {
           width: 600px;
       }
     </style>
@@ -35,11 +38,49 @@ Exemple d'utilisation du widget :
         $('#istex-widget-search').istexSearch();
     </script>
 
+    <div id="istex-widget-results"></div>
+    <script type="text/javascript">
+        $('#istex-widget-results').istexResults();
+    </script>
+
   </body>
 </html>
 ```
 
-## Développeurs
+## Paramètres des widgets
+
+Les paramètres suivants peuvent être positionnés :
+
+```javascript
+
+    // l'adresse de l'API de l'Istex
+    istexApi: 'https://api.istex.fr',
+
+    // pour lancer une recherche au chargement de la page
+    // positionner les mots à rechercher
+    query: "",
+
+    // la taille en nombre de caractères du résumé
+    abstractLength: 250,
+
+    // quel est le format clickable au niveau du titre
+    fullTextOnTitle: 'pdf',
+
+    // le nom de l'évènement émit au moment d'une recherche
+    resultsEventName: "istex-results"
+
+```
+
+
+## Fonctionnement du widget istexSearch
+
+Ce widget permet d'insérer dans la page HTML une zone de saisie ainsi qu'un bouton de recherche. Lorsqu'une suite de mots sont tapés puis que le bouton rechercher est pressé, l'API Istex est interrogée à travers des requêtes AJAX. Une fois les résultats reçus, ils sont propagés aux widgets results et facets mais également à l'ensemble du DOM sous la forme d'un événement javascript (par défaut nommé "istex-results").
+
+## Fonctionnement du widget istexResults
+
+Ce widget permet d'insérer dans la page HTML la liste des résultats issus d'une recherche. Il a besoin donc besoin du widget istexSearch pour fonctionner. En effet, il se charge de capturer l'évènement "istex-results" puis de construire la liste des résultats à l'endroit souhaité dans la page HTML.
+
+## Documentation développeurs
 
 ### Installation d'un environnement de développement
 

@@ -8,11 +8,14 @@
 
   var pluginName = "istexResults";
   var defaults = {
+
+    // la taille en nombre de caractères du résumé
     abstractLength: 250,
 
     // quel est le format clickable au niveau du titre
     fullTextOnTitle: 'pdf',
 
+    // le nom de l'évènement émit au moment d'une recherche
     resultsEventName: "istex-results"
   };
 

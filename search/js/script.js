@@ -8,8 +8,14 @@
 
   var pluginName = "istexSearch";
   var defaults = {
+    // l'adresse de l'API de l'Istex
     istexApi: 'https://api.istex.fr',
+
+    // pour lancer une recherche au chargement de la page
+    // positionner les mots à rechercher
     query: "",
+    
+    // le nom de l'évènement émit au moment d'une recherche    
     resultsEventName: "istex-results"
   };
 
