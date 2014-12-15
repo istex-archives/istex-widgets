@@ -9,6 +9,10 @@
   var pluginName = "istexResults";
   var defaults = {
     abstractLength: 250,
+
+    // quel est le format clickable au niveau du titre
+    fullTextOnTitle: 'pdf',
+
     resultsEventName: "istex-results"
   };
 
@@ -132,7 +136,7 @@
         }
         dlItem.find('a').attr('href', ftItem.uri);
         // sepcial case for PDF (link to the title element)
-        if (ftItem.type == 'pdf') {
+        if (ftItem.type == self.settings.fullTextOnTitle) {
           itemElt.find('.istex-results-item-title').attr('href', ftItem.uri);
         }
         itemElt.find('.istex-results-item-download').append(dlItem);
