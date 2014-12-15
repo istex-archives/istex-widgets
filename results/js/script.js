@@ -36,7 +36,7 @@
     /*jshint ignore:start*/
     self.tpl.item = $(
       '<li class="istex-results-item">' +
-        '<a href="#" class="istex-results-item-title">Biomechanical Simulation of Electrode Migration for Deep Brain Stimulation</a>' +
+        '<a class="istex-results-item-title" target="_blank">Biomechanical Simulation of Electrode Migration for Deep Brain Stimulation</a>' +
         '<p class="istex-results-item-abstract">Developing a whole brain simulator, a computer simulation in modeling brain structure and functionality of human, is the ultimate goal of Brain Informatics. Brain simulator helps researchers cross the bridge between the cognitive behavior/decease, and the neurophysiology. Brain simulators development is still in infant stage. Current simulators mostly consider the neuron as the basic functional component. This paper starts with introducing the background and current status of brain simulator. Then, an extensible brain simulator development framework is proposed. From information technology perspective, we adopt overlay and peer-to-peer network to deal with the complexity of brain network. Moreover, layered design with object-oriented brain class hierarchy forms the flexible development framework of the proposed simulator. The proposed brain simulator is evolved in case-based incremental delivery style. The power of the simulator will grow along with more research cases from cognitive and clinical neuroscience.</p>' +
         '<div class="istex-results-item-corpus">springer</div>' +
         '<ul class="istex-results-item-download">' +
@@ -48,6 +48,48 @@
           '</li>' +
         '</ul>' +
         '<div class="istex-results-item-bottom"></div>' +
+      '</li>'
+    );
+    
+    self.tpl.dlItem = {};
+    self.tpl.dlItem['default'] = $(
+      '<li class="istex-results-item-dl">' +
+        '<a href="#" title="Télécharger le fichier (format inconnu)" target="_blank"></a>' +
+      '</li>'
+    );
+    self.tpl.dlItem['mods'] = $(
+      '<li class="istex-results-item-dl">' +
+        '<a href="#" class="istex-results-item-dl-mods" title="Télécharger les métadonnées MODS" target="_blank"></a>' +
+      '</li>'
+    );
+    self.tpl.dlItem['xml'] = $(
+      '<li class="istex-results-item-dl">' +
+        '<a href="#" class="istex-results-item-dl-xml" title="Télécharger les métadonnées éditeur (XML)" target="_blank"></a>' +
+      '</li>'
+    );
+    self.tpl.dlItem['zip'] = $(
+      '<li class="istex-results-item-dl">' +
+        '<a href="#" class="istex-results-item-dl-zip" title="Télécharger le tout au format ZIP" target="_blank"></a>' +
+      '</li>'
+    );
+    self.tpl.dlItem['tiff'] = $(
+      '<li class="istex-results-item-dl">' +
+        '<a href="#" class="istex-results-item-dl-tiff" title="Télécharger le ou les fichiers TIFF" target="_blank"></a>' +
+      '</li>'
+    );
+    self.tpl.dlItem['tei'] = $(
+      '<li class="istex-results-item-dl">' +
+        '<a href="#" class="istex-results-item-dl-tei" title="Télécharger le plein-texte TEI" target="_blank"></a>' +
+      '</li>'
+    );
+    self.tpl.dlItem['txt'] = $(
+      '<li class="istex-results-item-dl">' +
+        '<a href="#" class="istex-results-item-dl-txt" title="Télécharger le plein-texte TXT" target="_blank"></a>' +
+      '</li>'
+    );
+    self.tpl.dlItem['pdf'] = $(
+      '<li class="istex-results-item-dl">' +
+        '<a href="#" class="istex-results-item-dl-pdf" title="Télécharger le plein-texte PDF" target="_blank"></a>' +
       '</li>'
     );
     /*jshint ignore:end*/
@@ -72,17 +114,50 @@
     // build the result list
     var items = self.tpl.items.clone();
     $.each(results.hits, function (idx, item) {
-      var item = self.tpl.item.clone();
+      var itemElt = self.tpl.item.clone();
+
+      console.log(item);
+      itemElt.find('.istex-results-item-title').text(item.title);
+      itemElt.find('.istex-results-item-abstract').text(item.abstract);
+      itemElt.find('.istex-results-item-corpus').text(item.corpusName);
+
+      itemElt.find('.istex-results-item-download').empty();
+      // fulltext links
+      $.each(item.fulltext, function (idx, ftItem) {
+        var dlItem;
+        if (self.tpl.dlItem[ftItem.type]) {
+          dlItem = self.tpl.dlItem[ftItem.type].clone();
+        } else {
+          dlItem = self.tpl.dlItem['default'].clone();
+        }
+        dlItem.find('a').attr('href', ftItem.uri);
+        // sepcial case for PDF (link to the title element)
+        if (ftItem.type == 'pdf') {
+          itemElt.find('.istex-results-item-title').attr('href', ftItem.uri);
+        }
+        itemElt.find('.istex-results-item-download').append(dlItem);
+      });
+      // metadata links
+      $.each(item.metadata, function (idx, ftItem) {
+        var dlItem;
+        if (self.tpl.dlItem[ftItem.type]) {
+          dlItem = self.tpl.dlItem[ftItem.type].clone();
+        } else {
+          dlItem = self.tpl.dlItem['default'].clone();
+        }
+        dlItem.find('a').attr('href', ftItem.uri);
+        itemElt.find('.istex-results-item-download').append(dlItem);
+      });
 
       // truncate abstract text
-      var abs = item.find('.istex-results-item-abstract').text();
+      var abs = itemElt.find('.istex-results-item-abstract').text();
       if (abs.length > self.settings.abstractLength) {
         abs = abs.substring(0, self.settings.abstractLength);
         abs += "…";
-        item.find('.istex-results-item-abstract').text(abs);
+        itemElt.find('.istex-results-item-abstract').text(abs);
       }
 
-      items.append(item);
+      items.append(itemElt);
     });
 
     // cleanup the result list in the DOM

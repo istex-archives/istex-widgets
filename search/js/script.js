@@ -54,7 +54,7 @@
       // handled by the native jquery jsonp function
       $.jsonp({
         url: self.settings.istexApi + '/document/',
-        data: { q: query },
+        data: { q: query, output: '*' },
         callbackParameter: "callback",
         success: function(items) {
           // hide the error box
