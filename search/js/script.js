@@ -73,6 +73,11 @@
       return false;
     });
 
+    // execute a search if query parameter is not blank
+    if (self.settings.query) {
+      $(self.elt).find('.istex-search-form').trigger('submit');
+    }
+
   };
 
   // A really lightweight plugin wrapper around the constructor,
