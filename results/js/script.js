@@ -115,7 +115,12 @@
 
       console.log(item);
       itemElt.find('.istex-results-item-title').text(item.title);
-      itemElt.find('.istex-results-item-abstract').text(item.abstract);
+      if (item.abstract) {
+        itemElt.find('.istex-results-item-abstract').text(item.abstract);  
+      } else {
+        itemElt.find('.istex-results-item-abstract').text('…');
+        itemElt.find('.istex-results-item-abstract').attr('title', 'Pas de résumé');
+      }
       itemElt.find('.istex-results-item-corpus').text(item.corpusName);
 
       itemElt.find('.istex-results-item-download').empty();
@@ -152,6 +157,15 @@
         abs = abs.substring(0, self.settings.abstractLength);
         abs += "…";
         itemElt.find('.istex-results-item-abstract').text(abs);
+      }
+
+      // truncate title text
+      var title = itemElt.find('.istex-results-item-title').text();
+      if (title.length > self.settings.titleLength) {
+        title = title.substring(0, self.settings.titleLength);
+        title += "…";
+        itemElt.find('.istex-results-item-title').attr('title', itemElt.find('.istex-results-item-title').text());
+        itemElt.find('.istex-results-item-title').text(title);
       }
 
       items.append(itemElt);
