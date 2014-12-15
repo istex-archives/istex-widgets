@@ -6,23 +6,13 @@
  */
 ;(function ($, window, document, undefined) {
 
-  var pluginName = "istexSearch";
-  var defaults = {
-    // l'adresse de l'API de l'Istex
-    istexApi: 'https://api.istex.fr',
-
-    // pour lancer une recherche au chargement de la page
-    // positionner les mots à rechercher
-    query: "",
-    
-    // le nom de l'évènement émit au moment d'une recherche    
-    resultsEventName: "istex-results"
-  };
+  var pluginName  = "istexSearch";
+  var defaults    = istexConfigDefault;
 
   // The actual plugin constructor
   function Plugin(element, options) {
     this.elt = element;
-    this.settings = $.extend({}, defaults, options);
+    this.settings = $.extend({}, defaults, istexConfig, options);
     this._defaults = defaults;
     this._name = pluginName;
     this.init();

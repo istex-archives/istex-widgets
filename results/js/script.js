@@ -7,22 +7,12 @@
 ;(function ($, window, document, undefined) {
 
   var pluginName = "istexResults";
-  var defaults = {
-
-    // la taille en nombre de caractères du résumé
-    abstractLength: 250,
-
-    // quel est le format clickable au niveau du titre
-    fullTextOnTitle: 'pdf',
-
-    // le nom de l'évènement émit au moment d'une recherche
-    resultsEventName: "istex-results"
-  };
+  var defaults = istexConfigDefault;
 
   // The actual plugin constructor
   function Plugin(element, options) {
     this.elt = element;
-    this.settings = $.extend({}, defaults, options);
+    this.settings = $.extend({}, defaults, istexConfig, options);
     this._defaults = defaults;
     this._name = pluginName;
     this.init();
