@@ -52,23 +52,26 @@ Voici ce que ca peut donner sur une page quasi vierge :
 Les paramètres suivants peuvent être positionnés :
 
 ```javascript
+var istexConfig = {
+  // l'adresse de l'API de l'Istex
+  istexApi: 'https://api.istex.fr',
+  
+  // pour lancer une recherche au chargement de la page
+  // positionner les mots à rechercher
+  query: "",
+  
+  // le nom de l'évènement émit au moment d'une recherche    
+  resultsEventName: "istex-results",
 
-    // l'adresse de l'API de l'Istex
-    istexApi: 'https://api.istex.fr',
+  // la taille max en nombre de caractères du résumé
+  abstractLength: 250,
 
-    // pour lancer une recherche au chargement de la page
-    // positionner les mots à rechercher
-    query: "",
+  // la taille max en nombre de caractères du titre
+  titleLength: 100,
 
-    // la taille en nombre de caractères du résumé
-    abstractLength: 250,
-
-    // quel est le format clickable au niveau du titre
-    fullTextOnTitle: 'pdf',
-
-    // le nom de l'évènement émit au moment d'une recherche
-    resultsEventName: "istex-results"
-
+  // quel est le format clickable au niveau du titre
+  fullTextOnTitle: 'pdf'
+};
 ```
 
 
