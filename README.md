@@ -1,8 +1,6 @@
-# widget.istex.fr
+# widgets.istex.fr
 
 Widgets ISTEX (search, results, facets) permettant de créer rapidement des interface Web d'interrogation des ressources ISTEX.
-
-[![Build Status](https://travis-ci.org/istex/widget.istex.fr.svg?branch=master)](https://travis-ci.org/istex/widget.istex.fr)
 
 ## Usage classique des widgets
 
