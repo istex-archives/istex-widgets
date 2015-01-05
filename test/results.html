@@ -11,11 +11,14 @@
         <!-- Charge la config par défault des widgets -->
         <script type="text/javascript" src="/lib/istexconfigdefault.js"></script>
 
-        <script type="text/javascript" src="/search/js/script.js"></script>
-        <link rel="stylesheet/less" type="text/css" href="/search/themes/default/style.less" />
+        <script type="text/javascript" src="/istexauth/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/istexauth/themes/default/style.less" />
 
-        <script type="text/javascript" src="/results/js/script.js"></script>
-        <link rel="stylesheet/less" type="text/css" href="/results/themes/default/style.less" />
+        <script type="text/javascript" src="/istexsearch/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/istexsearch/themes/default/style.less" />
+
+        <script type="text/javascript" src="/istexresults/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/istexresults/themes/default/style.less" />
 
         <script> var less = { env: "development", async: true }; </script>
         <script type="text/javascript" src="/bower_components/less/dist/less.min.js"></script>
@@ -28,8 +31,13 @@
     </head>
     <body>
 
-        <h1>istexSearch test</h1>
+        <h1>istexResults test</h1>
         
+        <div id="istex-widget-auth"></div>
+        <script type="text/javascript">
+          $('#istex-widget-auth').istexAuth();
+        </script>
+
         <div id="istex-widget-search"></div>
         <script type="text/javascript">
           $('#istex-widget-search').istexSearch({ query: 'brain' });
