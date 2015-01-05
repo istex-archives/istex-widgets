@@ -164,7 +164,8 @@
       if (title.length > self.settings.titleLength) {
         title = title.substring(0, self.settings.titleLength);
         title += "…";
-        itemElt.find('.istex-results-item-title').attr('title', itemElt.find('.istex-results-item-title').text());
+        itemElt.find('.istex-results-item-title')
+               .attr('title',itemElt.find('.istex-results-item-title').text());
         itemElt.find('.istex-results-item-title').text(title);
       }
 
