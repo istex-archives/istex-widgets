@@ -109,7 +109,7 @@
     // cookie auth window if clicked
     self.insertConnectBtnIfNotExists(function () {
       // open the window on the corpus route to request authentication
-      authPopup = window.open(self.settings.istexApi + '/ezproxy-auth-and-close.html');
+      window.open(self.settings.istexApi + '/ezproxy-auth-and-close.html');
 
       // check again auth when the user come back on the origin page
       $(window).focus(function () {
