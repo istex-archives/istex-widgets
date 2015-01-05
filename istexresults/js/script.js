@@ -132,10 +132,10 @@
         } else {
           dlItem = self.tpl.dlItem['default'].clone();
         }
-        dlItem.find('a').attr('href', ftItem.uri);
+        dlItem.find('a').attr('href', self.fixIstexAPILink(ftItem.uri));
         // sepcial case for PDF (link to the title element)
         if (ftItem.type == self.settings.fullTextOnTitle) {
-          itemElt.find('.istex-results-item-title').attr('href', ftItem.uri);
+          itemElt.find('.istex-results-item-title').attr('href', self.fixIstexAPILink(ftItem.uri));
         }
         itemElt.find('.istex-results-item-download').append(dlItem);
       });
@@ -147,7 +147,7 @@
         } else {
           dlItem = self.tpl.dlItem['default'].clone();
         }
-        dlItem.find('a').attr('href', ftItem.uri);
+        dlItem.find('a').attr('href', self.fixIstexAPILink(ftItem.uri));
         itemElt.find('.istex-results-item-download').append(dlItem);
       });
 
@@ -182,6 +182,16 @@
     $(self.elt).append(items);
   };
 
+
+  /**
+   * When ezproxy is used, the api link is not api.istex.fr
+   * but could be something like https://api-istex-fr.bases-doc.univ-lorraine.fr
+   * This function helps to fixe the absolute links returned by the API.
+   */
+  Plugin.prototype.fixIstexAPILink = function (link) {
+    var self = this;
+    return link.replace('https://api.istex.fr', self.settings.istexApi);
+  };
 
   /**
    * Helper to convert 2435667 to "2 435 667"
