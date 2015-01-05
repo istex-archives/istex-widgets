@@ -9,11 +9,11 @@
  * - concaténer les js et css pour la version "all-in-one"
  */
 
-var widgets = [ 'search', 'results' ];
+var widgets = [ 'istexauth', 'search', 'results' ];
 var themes  = [ 'default' ];
 
-var gulp       = require("gulp")
-var csso       = require("gulp-csso")
+var gulp       = require("gulp");
+var csso       = require("gulp-csso");
 var less       = require('gulp-less');
 var concat     = require('gulp-concat');
 var uglify     = require('gulp-uglify');
