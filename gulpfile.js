@@ -235,11 +235,27 @@ gulp.task('mocha', [ 'bower' ], function () {
 var httpServer = require('http-server');
 gulp.task('http', [ 'bower' ], function () {
   var server = httpServer.createServer({
-    root: __dirname
+    root: __dirname,
   });
   server.listen(8080, '127.0.0.1', function () {
     console.log('Listening on http://127.0.0.1:8080/index.html');
     console.log('Listening on http://127.0.0.1:8080/test/search.html');
+    console.log('Listening on http://127.0.0.1:8080/test/auth-ezproxy-ul.html');
+  });
+});
+gulp.task('https', [ 'bower' ], function () {
+  var server = httpServer.createServer({
+    root: __dirname,
+    https: {
+      cert: __dirname + '/tmp/test.pem',
+      key:  __dirname + '/tmp/test.key',
+      ca:   __dirname + '/tmp/test.pem'
+    }
+  });
+  server.listen(8080, '127.0.0.1', function () {
+    console.log('Listening on http://127.0.0.1:8080/index.html');
+    console.log('Listening on http://127.0.0.1:8080/test/search.html');
+    console.log('Listening on http://127.0.0.1:8080/test/auth-ezproxy-ul.html');
   });
 });
 
