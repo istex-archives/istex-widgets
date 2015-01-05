@@ -253,9 +253,9 @@ gulp.task('https', [ 'bower' ], function () {
     }
   });
   server.listen(8080, '127.0.0.1', function () {
-    console.log('Listening on http://127.0.0.1:8080/index.html');
-    console.log('Listening on http://127.0.0.1:8080/test/search.html');
-    console.log('Listening on http://127.0.0.1:8080/test/auth-ezproxy-ul.html');
+    console.log('Listening on https://127.0.0.1:8080/index.html');
+    console.log('Listening on https://127.0.0.1:8080/test/search.html');
+    console.log('Listening on https://127.0.0.1:8080/test/auth-ezproxy-ul.html');
   });
 });
 
