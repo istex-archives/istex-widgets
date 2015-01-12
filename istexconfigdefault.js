@@ -19,12 +19,7 @@ var istexConfigDefault = {
   titleLength: 100,
 
   // quel est le format clickable au niveau du titre
-  fullTextOnTitle: 'pdf',
-  
-  // l'instance de jquery à utiliser
-  // (utile lorsque l'on travail avec plusieurs version de jquery sur la page
-  // ou bien qu'on travail avec son mode noconflict)
-  jQuery: jQuery
+  fullTextOnTitle: 'pdf'
 };
 
 // create a empty istexConfig variable
