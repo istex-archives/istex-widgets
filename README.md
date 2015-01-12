@@ -57,7 +57,7 @@ Voici ce que ca peut donner sur une page quasi vierge :
 
 ## Paramètres des widgets
 
-Les paramètres suivants peuvent être positionnés :
+Les widgets peuvent être paramétrés en jouant sur les paramètres suivants :
 
 ```javascript
 var istexConfig = {
@@ -82,6 +82,7 @@ var istexConfig = {
 };
 ```
 
+Remarque : ces paramètres doivent être de préférence positionnés avant l'inclusion des fichiers widget.min.js et de widget.min.css
 
 ## Fonctionnement du widget istexSearch
 
