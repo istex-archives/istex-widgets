@@ -31,14 +31,19 @@ Voici ce que ca peut donner sur une page quasi vierge :
   </head>
   <body>
 
-    <div id="istex-widget-search"></div>
+    <div id="mysite-auth"></div>
     <script type="text/javascript">
-        $('#istex-widget-search').istexSearch();
+        $('#mysite-auth').istexAuth();
     </script>
 
-    <div id="istex-widget-results"></div>
+    <div id="mysite-search"></div>
     <script type="text/javascript">
-        $('#istex-widget-results').istexResults();
+        $('#mysite-search').istexSearch();
+    </script>
+
+    <div id="mysite-results"></div>
+    <script type="text/javascript">
+        $('#mysite-results').istexResults();
     </script>
 
   </body>
