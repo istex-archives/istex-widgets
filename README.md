@@ -19,6 +19,11 @@ Voici ce que ca peut donner sur une page quasi vierge :
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     
     <!-- Charge les widgets Istex -->
+    <script type="text/javascript">
+    var istexConfig = {
+      // paramètres du widget (cf section plus bas)
+    };
+    </script>
     <script type="text/javascript" src="//istex.github.io/js/widgets.min.js"></script>
     <link rel="stylesheet" href="//istex.github.io/themes/default/widgets.min.css" />
 
@@ -31,14 +36,19 @@ Voici ce que ca peut donner sur une page quasi vierge :
   </head>
   <body>
 
-    <div id="istex-widget-search"></div>
+    <div id="mysite-auth"></div>
     <script type="text/javascript">
-        $('#istex-widget-search').istexSearch();
+        $('#mysite-auth').istexAuth();
     </script>
 
-    <div id="istex-widget-results"></div>
+    <div id="mysite-search"></div>
     <script type="text/javascript">
-        $('#istex-widget-results').istexResults();
+        $('#mysite-search').istexSearch();
+    </script>
+
+    <div id="mysite-results"></div>
+    <script type="text/javascript">
+        $('#mysite-results').istexResults();
     </script>
 
   </body>
@@ -47,7 +57,7 @@ Voici ce que ca peut donner sur une page quasi vierge :
 
 ## Paramètres des widgets
 
-Les paramètres suivants peuvent être positionnés :
+Les widgets peuvent être paramétrés en positionnant les clés/valeurs de la variable globale istexConfig. La liste des différents paramètres (pour [la liste exhaustive, cf code source](https://github.com/istex/widgets.istex.fr/blob/master/lib/istexconfigdefault.js)) se présente comme ceci :
 
 ```javascript
 var istexConfig = {
@@ -58,6 +68,9 @@ var istexConfig = {
   // positionner les mots à rechercher
   query: "",
   
+  // le nom de l'évènement émit au moment de l'authentification réussie
+  connectedEventName: "istex-connected",
+
   // le nom de l'évènement émit au moment d'une recherche    
   resultsEventName: "istex-results",
 
@@ -68,10 +81,16 @@ var istexConfig = {
   titleLength: 100,
 
   // quel est le format clickable au niveau du titre
-  fullTextOnTitle: 'pdf'
+  fullTextOnTitle: 'pdf',
+  
+  // l'instance de jquery à utiliser
+  // (utile lorsque l'on travail avec plusieurs version de jquery sur la page
+  // ou bien qu'on travail avec son mode noconflict)
+  jQuery: jQuery
 };
 ```
 
+Remarque : ces paramètres doivent être de préférence positionnés avant l'inclusion des fichiers widget.min.js et de widget.min.css
 
 ## Fonctionnement du widget istexSearch
 
