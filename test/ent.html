@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>widget istex simulé dans HTML de l'ENT</title>
+        
+        <!-- simulation du comportement de l'ENT -->
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/ResourceServingWebapp/rs/jquery/1.8.3/jquery-1.8.3.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/ResourceServingWebapp/rs/jquery-plugins/form/3.25.0-2013.01.18/jquery.form-3.25.0-2013.01.18.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/ResourceServingWebapp/rs/jquery-plugins/validation/1.11.1/jquery.validate-1.11.1.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/ResourceServingWebapp/rs/jquery-plugins/validation/1.11.1/additional-methods-1.11.1.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/ResourceServingWebapp/rs/jquery-plugins/cookie/1.0/jquery.cookie-1.0.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/ResourceServingWebapp/rs/jqueryui/1.8.24/jquery-ui-1.8.24.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/ResourceServingWebapp/rs/jqueryui/1.8.24/i18n/jquery-ui-i18n.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/ResourceServingWebapp/rs/underscore/1.5.2/underscore-1.5.2.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/ResourceServingWebapp/rs/backbone/1.0.0/backbone-1.0.0.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/ResourceServingWebapp/rs/fluid/1.4.0-upmc/js/fluid-all-1.4.0.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/common/javascript/uportal/up-ga.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/common/javascript/uportal/iframe-autoheight-using-postMessage.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-util.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-portlet-registry.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-entity-registry.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-portlet-browser.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-layout-draggable-manager.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-layout-gallery.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-fragment-permissions-manager.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-subscription-browser.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-layout-selector.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-skin-selector.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-tab-manager.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-layout-persistence.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-url-provider.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-layout-preferences.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-autocomplete.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-showHideToggle.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/entity-selector.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-parameter-editor.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/flyout-nav.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-translator.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-sidebar-improved.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/common/javascript/uportal/up-print-plugin.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/uportal3/javascript/iframe-resize-plugins.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/uportal3/javascript/iframe-open-plugins.js"></script>
+        <script type="text/javascript" src="https://ent-integration.univ-lorraine.fr/media/skins/universality/uportal3/javascript/sitemap.js"></script>
+        <script>
+        var up = up || {};
+        up.jQuery = jQuery.noConflict(true);
+        </script>
+
+        <!-- Code pour permettre aux widget ISTEX d'utiliser le jQuery de l'ENT -->
+        <script>
+        jQuery = $ = up.jQuery;
+        </script>
+
+        <!-- Widget ISTEX -->
+        <script src="/bower_components/jquery-jsonp/src/jquery.jsonp.js"></script>
+        <script type="text/javascript" src="/istexconfigdefault.js"></script>
+        <script type="text/javascript" src="/istexauth/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/istexauth/themes/default/style.less" />
+        <script type="text/javascript" src="/istexsearch/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/istexsearch/themes/default/style.less" />
+        <script type="text/javascript" src="/istexresults/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/istexresults/themes/default/style.less" />
+        <script> var less = { env: "development", async: true }; </script>
+        <script type="text/javascript" src="/bower_components/less/dist/less.min.js"></script>
+
+        <style>
+        #istex-widget-search {
+            width: 600px;
+        }
+        </style>
+    </head>
+    <body>
+
+        <h1>Widget ISTEX et l'ENT</h1>
+        
+        <div id="ent-istex-auth"></div>
+        <div id="ent-istex-search"></div>
+        <div id="ent-istex-results"></div>
+
+        <script type="text/javascript">
+            $('#ent-istex-auth').istexAuth();
+            $('#ent-istex-search').istexSearch();
+            $('#ent-istex-results').istexResults();
+        </script>
+    </body>
+</html>
