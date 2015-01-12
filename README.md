@@ -68,6 +68,9 @@ var istexConfig = {
   // positionner les mots à rechercher
   query: "",
   
+  // le nom de l'évènement émit au moment de l'authentification réussie
+  connectedEventName: "istex-connected",
+
   // le nom de l'évènement émit au moment d'une recherche    
   resultsEventName: "istex-results",
 
@@ -78,7 +81,12 @@ var istexConfig = {
   titleLength: 100,
 
   // quel est le format clickable au niveau du titre
-  fullTextOnTitle: 'pdf'
+  fullTextOnTitle: 'pdf',
+  
+  // l'instance de jquery à utiliser
+  // (utile lorsque l'on travail avec plusieurs version de jquery sur la page
+  // ou bien qu'on travail avec son mode noconflict)
+  jQuery: jQuery
 };
 ```
 
