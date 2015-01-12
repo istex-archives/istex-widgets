@@ -201,6 +201,19 @@ gulp.task('js', [ 'js-all-in-one' ], function () {
           .pipe(gulp.dest('./dist/' + widget + '/js/'))
     );    
   });
+  
+  // special case for istexconfigdefault.js
+  gulpSubTask.push(
+    gulp.src('./istexconfigdefault.js')
+        .pipe(gulp.dest('./dist/'))
+  );
+  gulpSubTask.push(
+    gulp.src('./istexconfigdefault.js')
+        .pipe(jsmin())
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(gulp.dest('./dist/'))
+  );
+
   return es.concat.apply(null, gulpSubTask);
 });
 
