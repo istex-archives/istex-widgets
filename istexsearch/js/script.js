@@ -49,7 +49,7 @@
         '<div class="istex-search-bar-wrapper">' +
           '<input class="istex-search-submit" type="submit" value="Rechercher" />' +
           '<span>' +
-            '<input class="istex-search-input" type="text" value="" placeholder="Votre requête ici ..." />' +
+            '<input class="istex-search-input" type="search" value="" placeholder="Votre requête ici ..." />' +
           '</span>' +
         '</div>' +
         '<p class="istex-search-error"></p>' +
@@ -87,18 +87,6 @@
 
       return false;
     }); // end of ('.istex-search-form').submit(
-
-    // adjust styles comming for example from ENT
-    // to avoid a small search button:
-    // https://trello-attachments.s3.amazonaws.com/547753d55c854b80778562d6/725x667/51dcbf7933acc93c8cb85a642c321a4d/upload_2015-01-12_at_6.10.52_pm.png
-    $(self.elt).find('.istex-search-submit').css(
-      'font-size',
-      $(self.elt).find('.istex-search-input').css('font-size')
-    );
-    $(self.elt).find('.istex-search-submit').css(
-      'padding',
-      $(self.elt).find('.istex-search-input').css('padding')
-    );
 
     // execute a search if query parameter is not blank
     if (self.settings.query) {
