@@ -27,7 +27,6 @@
 
     // listen connected event (auth widget tells auth is ok)
     $(document).bind(self.settings.connectedEventName, function (event, istexAuth) {
-      console.log(istexAuth, istexAuth.istexApiRequester);
       // get and map the api requester
       self.istexApiRequester = istexAuth.istexApiRequester;
 
