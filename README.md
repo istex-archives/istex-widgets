@@ -57,7 +57,7 @@ Voici ce que ca peut donner sur une page quasi vierge :
 
 ## Paramètres des widgets
 
-Les widgets peuvent être paramétrés en positionnant les clés/valeurs de la variable globale istexConfig. La liste des différents paramètres (pour [la liste exhaustive, cf code source](https://github.com/istex/widgets/blob/master/istexconfigdefault.js)) se présente comme ceci :
+Les widgets peuvent être paramétrés en positionnant les clés/valeurs de la variable globale istexConfig. La liste des différents paramètres (pour [la liste exhaustive, cf code source](https://github.com/istex/istex-widgets/blob/master/istexconfigdefault.js)) se présente comme ceci :
 
 ```javascript
 var istexConfig = {
