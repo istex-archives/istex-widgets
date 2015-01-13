@@ -92,8 +92,8 @@
     /*jshint ignore:end*/
 
     // bind received results
-    $(document).bind(self.settings.resultsEventName, function (event, results) {
-      self.updateResultsInTheDom(results);
+    $(document).bind(self.settings.resultsEventName, function (event, results, istexSearch) {
+      self.updateResultsInTheDom(results, istexSearch);
     });
 
   };
@@ -101,13 +101,16 @@
   /**
    * Update the DOM with the received results
    */
-  Plugin.prototype.updateResultsInTheDom = function (results) {
+  Plugin.prototype.updateResultsInTheDom = function (results, istexSearch) {
     var self = this;
+
+    // calculate the query time
+    var queryElapsedTime = new Date() - istexSearch.queryStartTime;
 
     // build the result stats element
     var stats = self.tpl.stats.clone();
     if (results.total > 0) {
-      stats.text('Environ ' + niceNumber(results.total) + ' résultats');      
+      stats.text('Environ ' + niceNumber(results.total) + ' résultats (' + (queryElapsedTime/1000).toFixed(2) + ' secondes)');
     } else {
       stats.text('Aucun résultat');      
     }

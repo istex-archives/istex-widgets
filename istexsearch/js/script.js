@@ -66,6 +66,9 @@
       var query = $(self.elt).find('input.istex-search-input').val().trim();
       query = query ? query : '*';
 
+      // set the timer to know when the query has been done (ex: to have the query time)
+      self.queryStartTime = new Date();
+
       // send the request to the istex api
       self.istexApiRequester({
         url: self.settings.istexApi + '/document/',
