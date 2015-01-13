@@ -25,6 +25,7 @@ var bower      = require('gulp-bower');
 var clean      = require('gulp-clean');
 var git        = require('gulp-git');
 var es         = require('event-stream');
+var glob       = require("glob");
 
 // default task: build everything
 gulp.task("default", [ "build" ]);
@@ -251,9 +252,11 @@ gulp.task('http', [ 'bower' ], function () {
     root: __dirname,
   });
   server.listen(8080, '127.0.0.1', function () {
-    console.log('Listening on http://127.0.0.1:8080/index.html');
-    console.log('Listening on http://127.0.0.1:8080/test/search.html');
-    console.log('Listening on http://127.0.0.1:8080/test/auth-ezproxy-ul.html');
+    glob("{*.html,test/*.html}", function (err, files) {
+      files.forEach(function (file) {
+        console.log('Listening on http://127.0.0.1:8080/' + file);
+      });
+    });
   });
 });
 gulp.task('https', [ 'bower' ], function () {
@@ -266,9 +269,11 @@ gulp.task('https', [ 'bower' ], function () {
     }
   });
   server.listen(8080, '127.0.0.1', function () {
-    console.log('Listening on https://127.0.0.1:8080/index.html');
-    console.log('Listening on https://127.0.0.1:8080/test/search.html');
-    console.log('Listening on https://127.0.0.1:8080/test/auth-ezproxy-ul.html');
+    glob("{*.html,test/*.html}", function (err, files) {
+      files.forEach(function (file) {
+        console.log('Listening on https://127.0.0.1:8080/' + file);
+      });
+    });
   });
 });
 

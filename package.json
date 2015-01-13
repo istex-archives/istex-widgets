@@ -39,6 +39,7 @@
     "zombie": "^2.4.0"
   },
   "dependencies": {
+    "glob": "^4.3.4",
     "gulp-clean": "^0.3.1"
   }
 }
