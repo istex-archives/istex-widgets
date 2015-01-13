@@ -1,6 +1,6 @@
-# widgets.istex.fr
+# Widgets ISTEX
 
-Widgets ISTEX (search, results, facets) permettant de créer rapidement des interface Web d'interrogation des ressources ISTEX.
+Widgets (auth, search, results, facets) permettant de créer rapidement des interface Web d'interrogation des ressources ISTEX.
 
 ## Usage classique des widgets
 
@@ -57,7 +57,7 @@ Voici ce que ca peut donner sur une page quasi vierge :
 
 ## Paramètres des widgets
 
-Les widgets peuvent être paramétrés en positionnant les clés/valeurs de la variable globale istexConfig. La liste des différents paramètres (pour [la liste exhaustive, cf code source](https://github.com/istex/widgets.istex.fr/blob/master/istexconfigdefault.js)) se présente comme ceci :
+Les widgets peuvent être paramétrés en positionnant les clés/valeurs de la variable globale istexConfig. La liste des différents paramètres (pour [la liste exhaustive, cf code source](https://github.com/istex/widgets/blob/master/istexconfigdefault.js)) se présente comme ceci :
 
 ```javascript
 var istexConfig = {
