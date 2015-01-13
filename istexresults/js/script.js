@@ -106,7 +106,11 @@
 
     // build the result stats element
     var stats = self.tpl.stats.clone();
-    stats.text('Environ ' + niceNumber(results.total) + ' résultats');
+    if (results.total > 0) {
+      stats.text('Environ ' + niceNumber(results.total) + ' résultats');      
+    } else {
+      stats.text('Aucun résultat');      
+    }
     
     // build the result list
     var items = self.tpl.items.clone();
