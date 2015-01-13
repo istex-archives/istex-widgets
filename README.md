@@ -87,6 +87,17 @@ var istexConfig = {
 
 Remarque : ces paramètres doivent être de préférence positionnés avant l'inclusion des fichiers widget.min.js et de widget.min.css
 
+## Fonctionnement du widget istexAuth
+
+Ce widget permet d'insérer dans la page HTML un bouton de connexion qui s'affiche uniquement si l'utilisateur n'est pas connecté. 
+
+Différents moyens de connexion son successivement testés :
+- cookie (cas rencontré avec avec ezproxy & CAS)
+- http (login & mot de passe demandé)
+- ip (possible d'attaquer l'api en ajax directement)
+
+Une fois la connexion réalisée, le widget envoi l'évènement "istex-connected" au widget istexSearch qui ne s'affiche pas avant d'avoir reçu cet évènement.
+
 ## Fonctionnement du widget istexSearch
 
 Ce widget permet d'insérer dans la page HTML une zone de saisie ainsi qu'un bouton de recherche. Lorsqu'une suite de mots sont tapés puis que le bouton rechercher est pressé, l'API Istex est interrogée à travers des requêtes AJAX. Une fois les résultats reçus, ils sont propagés aux widgets results et facets mais également à l'ensemble du DOM sous la forme d'un événement javascript (par défaut nommé "istex-results").
