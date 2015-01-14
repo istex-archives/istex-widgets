@@ -125,7 +125,7 @@
       if (item.abstract) {
         itemElt.find('.istex-results-item-abstract').text(item.abstract);  
       } else {
-        itemElt.find('.istex-results-item-abstract').text('…');
+        itemElt.find('.istex-results-item-abstract').text('');
         itemElt.find('.istex-results-item-abstract').attr('title', 'Pas de résumé');
       }
       itemElt.find('.istex-results-item-corpus').text(item.corpusName);
