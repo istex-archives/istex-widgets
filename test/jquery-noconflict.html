@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>widget istex and jquery noconflict</title>
+
+        <!-- jQuery est une dépendances nécessaire -->
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        
+        <script>
+        // simulation du comportement de l'ENT
+        var up = up || {};
+        var up.jQuery = jQuery.noConflict(true);
+        </script>
+
+        <script src="/bower_components/jquery-jsonp/src/jquery.jsonp.js"></script>
+
+        <!-- Charge la config par défault des widgets -->
+        <script type="text/javascript" src="/istexconfigdefault.js"></script>
+
+        <script type="text/javascript" src="/istexauth/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/istexauth/themes/default/style.less" />
+
+        <script type="text/javascript" src="/istexsearch/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/istexsearch/themes/default/style.less" />
+
+        <script> var less = { env: "development", async: true }; </script>
+        <script type="text/javascript" src="/bower_components/less/dist/less.min.js"></script>
+
+        <style>
+        #istex-widget-search {
+            width: 600px;
+        }
+        </style>
+    </head>
+    <body>
+
+        <h1>istexSearch test</h1>
+        
+       <div id="istex-widget-auth"></div>
+        <script type="text/javascript">
+          $('#istex-widget-auth').istexAuth();
+        </script>
+
+        <div id="istex-widget-search"></div>
+        <script type="text/javascript">
+            $('#istex-widget-search').istexSearch();
+        </script>
+
+        <!-- for debug -->
+        <div id="istex-results-in-dom"></div>
+        <script type="text/javascript">
+            //$("#istex-results-in-dom").hide();
+            $(document).bind('istex-results', function (event, items) {
+                $("#istex-results-in-dom").text(JSON.stringify(items));
+            });
+        </script>
+
+    </body>
+</html>
