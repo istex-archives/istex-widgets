@@ -189,13 +189,16 @@
           // if "Se connecter" is clicked, then try to auth through AJAX
           // with the given login/password
           var httpOptions = {
-            username: $(self.elt).find('istex-auth-popup-login').val(),
-            password: $(self.elt).find('istex-auth-popup-password').val(),
+            headers: {
+              "Authorization": "Basic " + btoa(
+                $(self.elt).find('.istex-auth-popup-login').val() + ":" +
+                $(self.elt).find('.istex-auth-popup-password').val())
+            }
           };
+
           $.ajax({
             url: self.settings.istexApi + '/corpus/',
-            username: httpOptions.username,
-            password: httpOptions.password,
+            headers: httpOptions.headers,
             success: function () {
               // auth ok, then cleanup and respond ok
               $(self.elt).find('.istex-auth-popup').remove();
@@ -223,7 +226,7 @@
    * Create a self.istexApiRequester function
    * used to wrap jsonp or ajax query system
    */
-  Plugin.prototype.setupGenericRequester = function (authMode, options) {
+  Plugin.prototype.setupGenericRequester = function (authMode, authOptions) {
     var self = this;
 
     // create a generic requester
@@ -233,17 +236,13 @@
       self.istexApiRequester = function (options) {
         var reqOpt = $.extend({
           callbackParameter: "callback"
-        }, options);
+        }, authOptions, options);
         return $.jsonp(reqOpt);
       };
     } else {
       // ajax
       self.istexApiRequester = function (options) {
-        var reqOpt = $.extend({
-          headers: {
-            // todo : basic auth <= options
-          }
-        }, options);
+        var reqOpt = $.extend(authOptions, options);
         return $.ajax(reqOpt);
       };
     }
