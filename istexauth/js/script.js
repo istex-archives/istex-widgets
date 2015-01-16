@@ -185,6 +185,11 @@
             '<input class="istex-auth-popup-submit" type="submit" value="Se connecter" default="default"/>' +
             '<button class="istex-auth-popup-cancel">Annuler</button>' +
           '</div>' +
+          '<p class="istex-auth-popup-info">' +
+            '<a href="https://ia.inist.fr/people/newer" target="_blank">S\'inscrire</a> | ' +
+            '<a href="https://ia.inist.fr/auth/retrieve" target="_blank">Retrouver son mot de passe</a> | ' +
+            '<a href="mailto:istex@inist.fr?subject=Demande d\'un accès à la plateforme ISTEX">Demander une autorisation Istex</a>' +
+          '</p>' +
           '<p class="istex-auth-popup-error"></p>' +
         '</form>'
         /*jshint ignore:end*/
