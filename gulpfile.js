@@ -286,7 +286,6 @@ gulp.task('clean-dist', function () {
       './dist/*',
       '!./dist/.git/',
       '!./dist/index.html',
-      '!./dist/ezproxy-auth-and-close.html',
       '!./dist/bower.json',
       '!./dist/bower_components/',
     ], { read: false })
