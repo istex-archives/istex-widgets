@@ -21,7 +21,11 @@ var istexConfigDefault = {
   connectedEventName: "istex-connected",
 
   // le nom de l'évènement émit au moment d'une recherche    
-  resultsEventName: "istex-results"
+  resultsEventName: "istex-results",
+
+  // le nom de l'évènement émit a chaque fois qu'une recherche est envoyée
+  // et qui donnera probablement (sauf erreur) lieux à un event "istex-results"
+  waitingForResultsEventName: "istex-waiting-for-results"
 };
 
 // create a empty istexConfig variable

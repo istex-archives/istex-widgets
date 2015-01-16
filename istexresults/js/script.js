@@ -96,6 +96,12 @@
       self.updateResultsInTheDom(results, istexSearch);
     });
 
+    // bind waiting for result event
+    $(document).bind(self.settings.waitingForResultsEventName, function (event) {
+      // fade effect on the old result page
+      // to tell the user a query is in process
+      $(self.elt).css({ opacity: 0.5 });
+    });
   };
 
   /**
@@ -116,7 +122,7 @@
     }
     
     // build the result list
-    var items = self.tpl.items.clone();
+    var items = self.tpl.items.clone().hide();
     $.each(results.hits, function (idx, item) {
       var itemElt = self.tpl.item.clone();
 
@@ -181,12 +187,14 @@
 
     // cleanup the result list in the DOM
     $(self.elt).empty();
+    $(self.elt).css({ opacity: 1.0 });
 
     // insert the results stats into the DOM
     $(self.elt).append(stats);
 
     // insert the result list into the DOM
     $(self.elt).append(items);
+    items.fadeIn();
   };
 
 

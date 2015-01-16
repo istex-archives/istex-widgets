@@ -72,6 +72,9 @@
       // set the timer to know when the query has been done (ex: to have the query time)
       self.queryStartTime = new Date();
 
+      // send the event telling a new query is sent
+      $.event.trigger(self.settings.waitingForResultsEventName, [ self ]);
+
       // send the request to the istex api
       self.istexApiRequester({
         url: self.settings.istexApi + '/document/',
