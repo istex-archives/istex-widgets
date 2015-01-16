@@ -28,7 +28,7 @@
         <script type="text/javascript" src="/bower_components/less/dist/less.min.js"></script>
 
         <style>
-        #istex-widget-search, #istex-widget-results {
+        #mysite-istex-search, #mysite-istex-results, #mysite-istex-auth {
             font-family: sans-serif;
             width: 600px;
         }
@@ -38,15 +38,13 @@
 
         <h1>Exemple d'utilisation des widgets ISTEX</h1>
 
-        <div id="istex-widget-auth"></div>
-        <div id="istex-widget-search"></div>
-        <div id="istex-widget-facets"></div>
-        <div id="istex-widget-results"></div>
+        <div id="mysite-istex-auth"></div>
+        <div id="mysite-istex-search"></div>
+        <div id="mysite-istex-results"></div>
         <script type="text/javascript">
-            $('#istex-widget-auth').istexAuth();
-            $('#istex-widget-search').istexSearch();
-            // $('#istex-widget-facets').istexFacets({ corpus: ['springer', 'elsevier'] });
-            $('#istex-widget-results').istexResults();
+            $('#mysite-istex-auth').istexAuth();
+            $('#mysite-istex-search').istexSearch();
+            $('#mysite-istex-results').istexResults();
         </script>
 
     </body>
