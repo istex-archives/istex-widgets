@@ -116,7 +116,9 @@
     // build the result stats element
     var stats = self.tpl.stats.clone();
     if (results.total > 0) {
-      stats.text('Environ ' + niceNumber(results.total) + ' résultats (' + (queryElapsedTime/1000).toFixed(2) + ' secondes)');
+      stats.text('Environ '
+        + niceNumber(results.total)
+        + ' résultats (' + (queryElapsedTime/1000).toFixed(2) + ' secondes)');
     } else {
       stats.text('Aucun résultat');      
     }

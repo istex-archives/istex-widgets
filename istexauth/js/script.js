@@ -136,7 +136,9 @@
     if ($(self.elt).find('.istex-ezproxy-auth-btn').length > 0) {
       return;
     }
-    var authButtonHtml = $('<button class="istex-ezproxy-auth-btn">Se connecter<div></div></button>').hide();
+    var authButtonHtml = $(
+      '<button class="istex-ezproxy-auth-btn">Se connecter<div></div></button>'
+    ).hide();
     $(self.elt).append(authButtonHtml);
     authButtonHtml.fadeIn();
     $(self.elt).find('.istex-ezproxy-auth-btn').click(cb);
@@ -184,8 +186,9 @@
             '<button class="istex-auth-popup-cancel">Annuler</button>' +
           '</div>' +
           '<p class="istex-auth-popup-error"></p>' +
-        '</form>').hide();
+        '</form>'
         /*jshint ignore:end*/
+      ).hide();
 
       // then show a simple login/password popup
       $(self.elt).append(authFormHtml);
