@@ -162,58 +162,71 @@
 
     // first of all insert the connect button and when
     // it is clicked, then show the login/password popup
-    self.insertConnectBtnIfNotExists(function () {
+    self.insertConnectBtnIfNotExists(function (clickEvent) {
       if ($(self.elt).find('.istex-auth-popup').length > 0) {
         return;
       }
 
-      // append a simple login/password popup
+      // get a pointer to the connect button in order
+      // to be able to hide or show it 
+      var connectButton = $(clickEvent.target);
+
+      // hide the connect button
+      connectButton.hide();
+      // then show a simple login/password popup
       $(self.elt).append(
       /*jshint ignore:start*/
       '<form class="istex-auth-popup">' +
         '<div class="istex-auth-popup-wrapper">' +
           '<input class="istex-auth-popup-login" type="text" value="" placeholder="Votre login ..." />' +
           '<input class="istex-auth-popup-password" type="password" value="" placeholder="Votre mot de passe ..." />' +
-          '<input class="istex-auth-popup-cancel" type="submit" value="Annuler" />' +
-          '<input class="istex-auth-popup-submit" type="submit" value="Se connecter" />' +
+          '<input class="istex-auth-popup-submit" type="submit" value="Se connecter" default="default"/>' +
+          '<button class="istex-auth-popup-cancel">Annuler</button>' +
         '</div>' +
         '<p class="istex-auth-popup-error"></p>' +
       '</form>'
       /*jshint ignore:end*/
       );
+      // focus to the first field (username)
+      $(self.elt).find('.istex-auth-popup-login').focus();
 
+      // handle the cancel click
+      $(self.elt).find('.istex-auth-popup-cancel').click(function () {
+        console.log('cancel')
+        // if "Annuler" button is clicked, then cleanup
+        $(self.elt).find('.istex-auth-popup').remove();
+        // show again the "Se connecter" button
+        connectButton.show();
+        return false;
+      });
+
+      // handle the submit or "Se connecter" click
       $(self.elt).find('.istex-auth-popup').submit(function () {
-        var clicked = $(self.elt).find(".istex-auth-popup input[type=submit]:focus")
-                                 .attr('class');
-        if (clicked == 'istex-auth-popup-submit') {
-          // if "Se connecter" is clicked, then try to auth through AJAX
-          // with the given login/password
-          var httpOptions = {
-            headers: {
-              "Authorization": "Basic " + btoa(
-                $(self.elt).find('.istex-auth-popup-login').val() + ":" +
-                $(self.elt).find('.istex-auth-popup-password').val())
-            }
-          };
+        console.log('submit')
+        // if "Se connecter" is clicked, then try to auth through AJAX
+        // with the given login/password
+        var httpOptions = {
+          headers: {
+            "Authorization": "Basic " + btoa(
+              $(self.elt).find('.istex-auth-popup-login').val() + ":" +
+              $(self.elt).find('.istex-auth-popup-password').val())
+          }
+        };
 
-          $.ajax({
-            url: self.settings.istexApi + '/corpus/',
-            headers: httpOptions.headers,
-            success: function () {
-              // auth ok, then cleanup and respond ok
-              $(self.elt).find('.istex-auth-popup').remove();
-              return cb(null, httpOptions);
-            },
-            error: function (opt, err) {
-              $(self.elt).find('.istex-auth-popup-error')
-                         .text("Le nom d'utilisateur ou le mot de passe saisi est incorrect.");
-            }
-          });
-        } else if (clicked == 'istex-auth-popup-cancel') {
-          // if "Annuler" button is clicked, then cleanup
-          $(self.elt).find('.istex-auth-popup').remove();
-          cb(new Error('HTTP auth canceled'));
-        }
+        $.ajax({
+          url: self.settings.istexApi + '/corpus/',
+          headers: httpOptions.headers,
+          success: function () {
+            // auth ok, then cleanup and respond ok
+            $(self.elt).find('.istex-auth-popup').remove();
+            return cb(null, httpOptions);
+          },
+          error: function (opt, err) {
+            $(self.elt).find('.istex-auth-popup-error')
+                       .text("Le nom d'utilisateur ou le mot de passe saisi est incorrect.");
+          }
+        });
+
         return false;
       });
     
