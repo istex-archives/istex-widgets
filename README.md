@@ -20,9 +20,9 @@ Voici ce que ca peut donner sur une page quasi vierge :
     
     <!-- Charge les widgets Istex -->
     <script type="text/javascript">
-    var istexConfig = {
-      // paramètres du widget (cf section plus bas)
-    };
+      var istexConfig = {
+        // paramètres du widget (cf section plus bas)
+      };
     </script>
     <script type="text/javascript" src="//istex.github.io/js/widgets.min.js"></script>
     <link rel="stylesheet" href="//istex.github.io/themes/default/widgets.min.css" />
