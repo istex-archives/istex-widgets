@@ -154,18 +154,18 @@
 
   /**
    * Authenticate with the standard HTTP basic auth
-   * - shows a HTML popup to ask login and password
+   * - shows a HTML form to ask login and password
    * - when submitted, try to login through AJAX
-   * - if auth ok, then close the popup and return credentials to cb
+   * - if auth ok, then close the form and return credentials to cb
    * - if auth ok, then show an error message
    */
   Plugin.prototype.authWithHTTP = function (cb) {
     var self = this;
 
     // first of all insert the connect button and when
-    // it is clicked, then show the login/password popup
+    // it is clicked, then show the login/password form
     self.insertConnectBtnIfNotExists(function (clickEvent) {
-      if ($(self.elt).find('.istex-auth-popup').length > 0) {
+      if ($(self.elt).find('.istex-auth-form').length > 0) {
         return;
       }
 
@@ -178,53 +178,53 @@
 
       var authFormHtml = $(
         /*jshint ignore:start*/
-        '<form class="istex-auth-popup">' +
-          '<div class="istex-auth-popup-wrapper">' +
-            '<input class="istex-auth-popup-login" type="text" value="" placeholder="Votre login ..." />' +
-            '<input class="istex-auth-popup-password" type="password" value="" placeholder="Votre mot de passe ..." />' +
-            '<input class="istex-auth-popup-submit" type="submit" value="Se connecter" default="default"/>' +
-            '<button class="istex-auth-popup-cancel">Annuler</button>' +
+        '<form class="istex-auth-form">' +
+          '<div class="istex-auth-form-wrapper">' +
+            '<input class="istex-auth-form-login" type="text" value="" placeholder="Votre login ..." />' +
+            '<input class="istex-auth-form-password" type="password" value="" placeholder="Votre mot de passe ..." />' +
+            '<input class="istex-auth-form-submit" type="submit" value="Se connecter" default="default"/>' +
+            '<button class="istex-auth-form-cancel">Annuler</button>' +
           '</div>' +
-          '<p class="istex-auth-popup-info">' +
+          '<p class="istex-auth-form-info">' +
             '<a href="https://ia.inist.fr/people/newer" target="_blank">S\'inscrire</a> | ' +
             '<a href="https://ia.inist.fr/auth/retrieve" target="_blank">Retrouver son mot de passe</a> | ' +
             '<a href="mailto:istex@inist.fr?subject=Demande d\'un accès à la plateforme ISTEX">Demander une autorisation Istex</a>' +
           '</p>' +
-          '<p class="istex-auth-popup-error"></p>' +
+          '<p class="istex-auth-form-error"></p>' +
         '</form>'
         /*jshint ignore:end*/
       ).hide();
 
-      // then show a simple login/password popup
+      // then show a simple login/password form
       $(self.elt).append(authFormHtml);
       authFormHtml.fadeIn();
 
       // focus to the first field (username)
-      $(self.elt).find('.istex-auth-popup-login').focus();
+      $(self.elt).find('.istex-auth-form-login').focus();
 
       // handle the cancel click
-      $(self.elt).find('.istex-auth-popup-cancel').click(function () {
+      $(self.elt).find('.istex-auth-form-cancel').click(function () {
         // if "Annuler" button is clicked, then cleanup
-        $(self.elt).find('.istex-auth-popup').remove();
+        $(self.elt).find('.istex-auth-form').remove();
         connectButton.fadeIn();
         return false;
       });
 
       // handle the submit or "Se connecter" click
-      $(self.elt).find('.istex-auth-popup').submit(function () {
+      $(self.elt).find('.istex-auth-form').submit(function () {
 
         // disable form during authentification check      
         authFormHtml.find('input').attr('disabled', 'disabled');
         // cleanup error message
-        $(self.elt).find('.istex-auth-popup-error').hide();
+        $(self.elt).find('.istex-auth-form-error').hide();
 
         // if "Se connecter" is clicked, then try to auth through AJAX
         // with the given login/password
         var httpOptions = {
           headers: {
             "Authorization": "Basic " + btoa(
-              $(self.elt).find('.istex-auth-popup-login').val() + ":" +
-              $(self.elt).find('.istex-auth-popup-password').val())
+              $(self.elt).find('.istex-auth-form-login').val() + ":" +
+              $(self.elt).find('.istex-auth-form-password').val())
           }
         };
 
@@ -233,7 +233,7 @@
           headers: httpOptions.headers,
           success: function () {
             // auth ok, then cleanup and respond ok
-            $(self.elt).find('.istex-auth-popup').fadeOut({
+            $(self.elt).find('.istex-auth-form').fadeOut({
               complete: function () {
                 cb(null, httpOptions);
               }
@@ -243,7 +243,7 @@
             // enable form when authentification failed
             authFormHtml.find('input').removeAttr('disabled');
 
-            $(self.elt).find('.istex-auth-popup-error')
+            $(self.elt).find('.istex-auth-form-error')
                        .text("Le nom d'utilisateur ou le mot de passe saisi est incorrect.")
                        .fadeIn();
           }
