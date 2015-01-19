@@ -124,7 +124,8 @@ gulp.task('images', [ "clean-dist" ], function() {
     themes.forEach(function (theme) {
       // optimize images and copy to themes directories
       gulpSubTask.push(
-        gulp.src('./' + widget + '/themes/' + theme + '/*.png')
+        gulp.src([ './' + widget + '/themes/' + theme + '/*.png', 
+                   './' + widget + '/themes/' + theme + '/*.gif' ])
             .pipe(imagemin({ optimizationLevel: 5 }))
             .pipe(gulp.dest('./dist/' + widget + '/themes/' + theme + '/'))
       );
@@ -142,7 +143,8 @@ gulp.task('images-all-in-one', [ 'images' ], function() {
     themes.forEach(function (theme) {
       // copy to all-in-one directory
       gulpSubTask.push(
-        gulp.src('./dist/' + widget + '/themes/' + theme + '/*.png')
+        gulp.src([ './dist/' + widget + '/themes/' + theme + '/*.png',
+                   './dist/' + widget + '/themes/' + theme + '/*.gif' ])
             .pipe(gulp.dest('./dist/themes/' + theme + '/'))
       );
     });
