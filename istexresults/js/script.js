@@ -132,17 +132,21 @@
     // calculate the query time
     var queryElapsedTime = new Date() - istexSearch.queryStartTime;
 
-    // build the result stats element
+    // build the results statistics element
     var stats = self.tpl.stats.clone();
     if (results.total > 0) {
+      var queryTotalTime = (queryElapsedTime/1000).toFixed(2);
+      var queryElasticSearchTime = 'Réseau : ' + ((queryElapsedTime - results.esReqStats.took)/1000).toFixed(2) + ' sec, Moteur de recherche : ' + (results.esReqStats.took/1000).toFixed(2) + ' sec';
+      var querySpeedHtml = '<span title="' + queryElasticSearchTime + '">(' + queryTotalTime + ' secondes)</span>';
+      //querySpeedHtml.attr('title', 'EEEE');
       if (self.selectedPage > 1) {
-        stats.text('Page ' + self.selectedPage + ' sur environ '
+        stats.html('Page ' + self.selectedPage + ' sur environ '
           + niceNumber(results.total)
-          + ' résultats (' + (queryElapsedTime/1000).toFixed(2) + ' secondes)');
+          + ' résultats ' + querySpeedHtml);
       } else {
-        stats.text('Environ '
+        stats.html('Environ '
           + niceNumber(results.total)
-          + ' résultats (' + (queryElapsedTime/1000).toFixed(2) + ' secondes)');        
+          + ' résultats ' + querySpeedHtml);
       }
     } else {
       stats.text('Aucun résultat');      
