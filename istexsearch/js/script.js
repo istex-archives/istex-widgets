@@ -59,6 +59,7 @@
           '</span>' +
         '</div>' +
         '<p class="istex-search-error"></p>' +
+        '<div class="istex-search-loading"></div>' +
       '</form>'
       /*jshint ignore:end*/
     ).hide();
@@ -70,8 +71,7 @@
     $(self.elt).find('.istex-search-input').val(self.settings.query);
 
     // connect the submit action
-    $(self.elt).find('.istex-search-form').submit(function () {
-      
+    $(self.elt).find('.istex-search-form').submit(function () {      
       var query = $(self.elt).find('input.istex-search-input').val().trim();
       query = query ? query : '*';
       
@@ -121,6 +121,9 @@
     // send the event telling a new query is sent
     $.event.trigger(self.settings.waitingForResultsEventName, [ self ]);
 
+    // show the loading bar
+    $(self.elt).find('.istex-search-loading').fadeIn();
+
     // send the request to the istex api
     self.istexApiRequester({
       url: self.settings.istexApi + '/document/',
@@ -131,8 +134,9 @@
         from: ((pageIdx-1) * self.settings.pageSize)
       },
       success: function(items) {
-        // hide the error box
+        // hide the error box and the loading box
         $(self.elt).find('.istex-search-error').hide();
+        $(self.elt).find('.istex-search-loading').fadeOut();
         // forward the results as a global event
         $.event.trigger(self.settings.resultsEventName, [ items, self ]);
       },
@@ -141,6 +145,7 @@
           '<a href="https://api.istex.fr/corpus/">API Istex</a> non joignable.'
         );
         $(self.elt).find('.istex-search-error').show();
+        $(self.elt).find('.istex-search-loading').fadeOut();
       }
     });
   };
