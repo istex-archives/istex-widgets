@@ -33,6 +33,12 @@
       // auth is ok, then load the user interface
       self.loadInputForm();
     });
+
+    // listen istex-gotopage event
+    $(document).bind(self.settings.gotoPageEventName, function (event, pageIdx) {
+      self.execQuery(null, pageIdx);
+    });
+
   };
 
   /**
@@ -65,35 +71,12 @@
 
     // connect the submit action
     $(self.elt).find('.istex-search-form').submit(function () {
-
+      
       var query = $(self.elt).find('input.istex-search-input').val().trim();
       query = query ? query : '*';
-
-      // set the timer to know when the query has been done (ex: to have the query time)
-      self.queryStartTime = new Date();
-
-      // send the event telling a new query is sent
-      $.event.trigger(self.settings.waitingForResultsEventName, [ self ]);
-
-      // send the request to the istex api
-      self.istexApiRequester({
-        url: self.settings.istexApi + '/document/',
-        data: { q: query, output: '*' },
-        //callbackParameter: "callback",
-        success: function(items) {
-          // hide the error box
-          $(self.elt).find('.istex-search-error').hide();
-          // forward the results as a global event
-          $.event.trigger(self.settings.resultsEventName, [ items, self ]);
-        },
-        error: function (opt, err) {
-          $(self.elt).find('.istex-search-error').html(
-            '<a href="https://api.istex.fr/corpus/">API Istex</a> non joignable.'
-          );
-          $(self.elt).find('.istex-search-error').show();
-        }
-      });
-
+      
+      self.execQuery(query);
+      
       return false;
     }); // end of ('.istex-search-form').submit(
 
@@ -115,6 +98,53 @@
     }
 
   };
+
+  /**
+   * Execute a query
+   */
+  Plugin.prototype.execQuery = function (query, pageIdx) {
+    var self = this;
+
+    // if no page id selected the setup one
+    pageIdx = pageIdx || 1;
+
+    // if no query selected try to take the latest one
+    if (query) {
+      self.query = query;
+    } else {
+      query = self.query;
+    }
+
+    // set the timer to know when the query has been done (ex: to have the query time)
+    self.queryStartTime = new Date();
+
+    // send the event telling a new query is sent
+    $.event.trigger(self.settings.waitingForResultsEventName, [ self ]);
+
+    // send the request to the istex api
+    self.istexApiRequester({
+      url: self.settings.istexApi + '/document/',
+      data: {
+        q: query,
+        output: '*',
+        size: self.settings.pageSize,
+        from: ((pageIdx-1) * self.settings.pageSize)
+      },
+      success: function(items) {
+        // hide the error box
+        $(self.elt).find('.istex-search-error').hide();
+        // forward the results as a global event
+        $.event.trigger(self.settings.resultsEventName, [ items, self ]);
+      },
+      error: function (opt, err) {
+        $(self.elt).find('.istex-search-error').html(
+          '<a href="https://api.istex.fr/corpus/">API Istex</a> non joignable.'
+        );
+        $(self.elt).find('.istex-search-error').show();
+      }
+    });
+  };
+
 
   // A really lightweight plugin wrapper around the constructor,
   // preventing against multiple instantiations

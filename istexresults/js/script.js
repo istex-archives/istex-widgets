@@ -28,6 +28,25 @@
       '</div>'
     );
 
+    self.tpl.pagination = $(
+      '<div class="istex-results-pagination">' +
+        '<button class="istex-results-pagination-prec">Page précédente</button>' +
+        '<ul class="istex-results-pagination-plist">' +
+          '<li class="istex-results-pagination-page-selected">1</li>' +
+          '<li>2</li>' +
+          '<li>3</li>' +
+          '<li>4</li>' +
+          '<li>5</li>' +
+          '<li>6</li>' +
+          '<li>7</li>' +
+          '<li>8</li>' +
+          '<li>9</li>' +
+          '<li>10</li>' +
+        '</ul>' +
+        '<button class="istex-results-pagination-next">Page suivante</button>' +
+      '</div>'
+    );
+
     self.tpl.items = $('<ol class="istex-results-items"></ol>');
 
     /*jshint ignore:start*/
@@ -116,9 +135,15 @@
     // build the result stats element
     var stats = self.tpl.stats.clone();
     if (results.total > 0) {
-      stats.text('Environ '
-        + niceNumber(results.total)
-        + ' résultats (' + (queryElapsedTime/1000).toFixed(2) + ' secondes)');
+      if (self.selectedPage > 1) {
+        stats.text('Page ' + self.selectedPage + ' sur environ '
+          + niceNumber(results.total)
+          + ' résultats (' + (queryElapsedTime/1000).toFixed(2) + ' secondes)');
+      } else {
+        stats.text('Environ '
+          + niceNumber(results.total)
+          + ' résultats (' + (queryElapsedTime/1000).toFixed(2) + ' secondes)');        
+      }
     } else {
       stats.text('Aucun résultat');      
     }
@@ -128,7 +153,6 @@
     $.each(results.hits, function (idx, item) {
       var itemElt = self.tpl.item.clone();
 
-      console.log(item);
       itemElt.find('.istex-results-item-title').text(item.title);
       if (item.abstract) {
         itemElt.find('.istex-results-item-abstract').text(item.abstract);  
@@ -197,8 +221,104 @@
     // insert the result list into the DOM
     $(self.elt).append(items);
     items.fadeIn();
+
+    // handle the pagination element
+    self.updatePaginationInTheDom(
+      self.selectedPage || 1,
+      Math.ceil(results.total / self.settings.pageSize)
+    );
   };
 
+  /**
+   * Update the pagination element in the DOM
+   */
+  Plugin.prototype.updatePaginationInTheDom = function (selectedPage, numberOfPage) {
+    var self = this;
+
+    // skip the pagination zone if not wanted
+    if (!self.settings.showPagination) {
+      return;
+    }
+
+    // calculate the pageStart and pageEnd
+    var pageStart, pageEnd;
+    var maxPagesInPagination = self.settings.maxPagesInPagination;
+
+    // try to put the selectedPage in the middle
+    pageStart = selectedPage - Math.round(maxPagesInPagination/2) + 1;
+    pageEnd   = selectedPage + Math.round(maxPagesInPagination/2);
+    // manage the border case
+    if (pageStart < 1) {
+      pageStart = 1;
+    }
+    if (pageEnd > numberOfPage) {
+      pageEnd = numberOfPage;
+    }
+    // if less page to show than maxPagesInPagination
+    if (pageEnd - pageStart < maxPagesInPagination - 1) {
+      if (pageEnd - selectedPage < selectedPage - pageStart) {
+        pageStart = pageEnd - maxPagesInPagination + 1;
+      } else {
+        pageEnd = pageStart + maxPagesInPagination - 1;
+      }
+    }
+
+    // build the pagination HTML
+    var pagination = self.tpl.pagination.clone().hide();
+   
+    // do not show "précédent" link if the first page is selected
+    if (selectedPage == 1) {
+      pagination.find('.istex-results-pagination-prec').hide();
+    } else {
+      // when the prec page is clicked, goto selectedPage - 1
+      pagination.find('.istex-results-pagination-prec').click(function () {
+        self.gotoPage(selectedPage - 1);
+      });
+    }
+    // do not show "suivant" link if the last page is selected
+    if (selectedPage == numberOfPage) {
+      pagination.find('.istex-results-pagination-next').hide();
+    } else {
+      // when the next page is clicked, goto selectedPage + 1
+      pagination.find('.istex-results-pagination-next').click(function () {
+        self.gotoPage(selectedPage + 1);
+      });
+    }
+
+    // fill the pagination zone with pages
+    pagination.find('ul.istex-results-pagination-plist').empty();
+    for (var pageIdx = pageStart; pageIdx <= pageEnd; pageIdx++) {
+      var pageElt = $('<li><a>' + pageIdx + '</a></li>').data('page-idx', pageIdx);
+      if (pageIdx == selectedPage) {
+        pageElt.addClass('istex-results-pagination-page-selected');
+      } else {
+        // when the page is clicked, goto pageIdx
+        pageElt.click(function () {
+          self.gotoPage($(this).data('page-idx'));
+        });
+      }
+      //console.log(pageElt, pagination.find('.istex-results-pagination ul'))
+      pagination.find('ul.istex-results-pagination-plist').append(pageElt);
+    }
+
+    // insert the pagination zone into the DOM
+    $(self.elt).append(pagination);
+    pagination.fadeIn();
+  };
+
+  /**
+   * When a pagination link is clicked
+   * goto the specified page
+   */
+  Plugin.prototype.gotoPage = function (pageIdx) {
+    var self = this;
+    
+    // remember the selected page
+    self.selectedPage = pageIdx;
+
+    // send the event telling which page is requested
+    $.event.trigger(self.settings.gotoPageEventName, [ pageIdx ]);
+  };
 
   /**
    * When ezproxy is used, the api link is not api.istex.fr

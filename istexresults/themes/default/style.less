@@ -2,7 +2,6 @@
 div.istex-results-items-stats {
   padding: 0; margin: 0;
   line-height: 30px;
-  font-size: small;
   color: #808080;
 }
 
@@ -20,8 +19,8 @@ ol.istex-results-items {
     // document title
     a.istex-results-item-title {
       padding: 0; margin: 0;
-      font-size: 100%;
       font-weight: bold;
+      font-size: large;
       text-decoration: none;
       color: #478DA7;
     }
@@ -30,7 +29,7 @@ ol.istex-results-items {
     p.istex-results-item-abstract {
       padding: 0; margin: 0;
       margin-top: 4px;
-      font-size: 80%;
+      font-size: smaller;
       font-weight: lighter;
       text-decoration: none;
       text-align: justify;
@@ -41,7 +40,7 @@ ol.istex-results-items {
     div.istex-results-item-corpus {
       padding: 2px; margin: 0;
       margin-top: 8px;
-      font-size: 90%;
+      font-size: smaller;
       height: 16px;
       vertical-align: middle;
       font-family: monospace;
@@ -106,4 +105,46 @@ ol.istex-results-items {
       clear: both;
     }
   }
+}
+
+
+// pagination
+.istex-results-pagination {
+  margin: auto;
+  text-align: center;
+  button {
+    //float: left;
+  }
+  ul {
+    padding: 0; margin: 0;
+    list-style-type: none;
+    li {
+      padding: 0; margin: 0;
+      list-style-type: none;
+      margin-left: 2px;
+      margin-right: 2px;
+      //float: left;
+      a {
+        text-decoration: none;
+        cursor: pointer;
+      }
+      a:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+    li.istex-results-pagination-page-selected {
+      font-weight: bold;
+      a {
+        color: black;
+        cursor: default;
+      }
+      a:hover {
+        text-decoration: none;
+        cursor: default;
+      }
+    }
+  }
+
+
 }
