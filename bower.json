@@ -16,6 +16,7 @@
     "jquery": "~1"
   },
   "dependencies": {
-    "jquery-jsonp": "~2.4.0"
+    "jquery-jsonp": "~2.4.0",
+    "js-base64": "~2.1.7"
   }
 }

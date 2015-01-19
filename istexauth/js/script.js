@@ -222,7 +222,7 @@
         // with the given login/password
         var httpOptions = {
           headers: {
-            "Authorization": "Basic " + btoa(
+            "Authorization": "Basic " + Base64.encode(
               $(self.elt).find('.istex-auth-form-login').val() + ":" +
               $(self.elt).find('.istex-auth-form-password').val())
           }

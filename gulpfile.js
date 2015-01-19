@@ -160,6 +160,7 @@ gulp.task('js-all-in-one', [ "clean-dist" ], function () {
   // copy not minified version
   gulpSubTask.push(
     gulp.src([ './bower_components/jquery-jsonp/src/jquery.jsonp.js',
+               './bower_components/js-base64/base64.js',
                './istexconfigdefault.js' ].concat(
       widgets.map(function (w) {
         return './' + w + '/js/script.js';
@@ -172,6 +173,7 @@ gulp.task('js-all-in-one', [ "clean-dist" ], function () {
   // minify js one by one
   gulpSubTask.push(
     gulp.src([ './bower_components/jquery-jsonp/src/jquery.jsonp.js',
+               './bower_components/js-base64/base64.js',
                './istexconfigdefault.js' ].concat(
       widgets.map(function (w) {
         return './' + w + '/js/script.js';
