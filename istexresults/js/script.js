@@ -112,7 +112,15 @@
 
     // bind received results
     $(document).bind(self.settings.resultsEventName, function (event, results, istexSearch) {
-      self.updateResultsInTheDom(results, istexSearch);
+      try {
+        self.updateResultsInTheDom(results, istexSearch);
+      } catch (err) {
+        self.displayErrorInDom(
+          'Erreur car le format de l\'API Istex a probablement changé. <br/>' + 
+          'Merci de le signaler par mail à istex@inist.fr (copie d\'écran appréciée)',
+          err
+        );
+      }
     });
 
     // bind waiting for result event
@@ -136,7 +144,10 @@
     var stats = self.tpl.stats.clone();
     if (results.total > 0) {
       var queryTotalTime = (queryElapsedTime/1000).toFixed(2);
-      var queryElasticSearchTime = 'Réseau : ' + ((queryElapsedTime - results.esReqStats.took)/1000).toFixed(2) + ' sec, Moteur de recherche : ' + (results.esReqStats.took/1000).toFixed(2) + ' sec';
+      var queryElasticSearchTime = 'Réseau : ' 
+        + ((queryElapsedTime - results.esReqStats.took)/1000).toFixed(2)
+        + ' sec, Moteur de recherche : '
+        + (results.esReqStats.took/1000).toFixed(2) + ' sec';
       var querySpeedHtml = '<span title="' + queryElasticSearchTime + '">(' + queryTotalTime + ' secondes)</span>';
       //querySpeedHtml.attr('title', 'EEEE');
       if (self.selectedPage > 1) {
@@ -323,6 +334,30 @@
     // send the event telling which page is requested
     $.event.trigger(self.settings.gotoPageEventName, [ pageIdx ]);
   };
+
+  /**
+   * Update the DOM with the received results
+   */
+  Plugin.prototype.displayErrorInDom = function (message, err) {
+    var self = this;
+
+    $(self.elt).css({ opacity: 1.0 });
+    $(self.elt).fadeOut({
+      complete: function () {
+        $(self.elt).empty();
+        $(self.elt).append(
+          '<p class="istex-results-error">' +
+            '<span class="istex-results-error-msg">' + message + '</span>' +
+            '<br/>' +
+            '<span class="istex-results-error-raw">' + err + '</span>' +
+          '</p>'
+        );
+        $(self.elt).fadeIn();
+      }
+    });
+
+  };
+
 
   /**
    * When ezproxy is used, the api link is not api.istex.fr
