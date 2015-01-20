@@ -120,6 +120,10 @@ curl https://raw.githubusercontent.com/creationix/nvm/v0.20.0/install.sh | bash
 nvm install 0.10
 nvm use 0.10
 ```
+Exemple sous MacOSX :
+```
+brew install node
+```
 
 Récupérer le dépôt git des widgets Istex :
 ```
@@ -130,7 +134,7 @@ Initialiser les dépendances (gulp est l'outil de build) :
 ```
 cd widget.istex.fr/
 npm install
-npm install -g gulp
+npm install -g gulp bower
 gulp init
 ```
 
