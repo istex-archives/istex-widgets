@@ -30,7 +30,7 @@
 
     self.tpl.pagination = $(
       '<div class="istex-results-pagination">' +
-        '<button class="istex-results-pagination-prec">Page précédente</button>' +
+        '<button class="istex-results-pagination-prec" title="Page précédente">Page précédente</button>' +
         '<ul class="istex-results-pagination-plist">' +
           '<li class="istex-results-pagination-page-selected">1</li>' +
           '<li>2</li>' +
@@ -43,7 +43,7 @@
           '<li>9</li>' +
           '<li>10</li>' +
         '</ul>' +
-        '<button class="istex-results-pagination-next">Page suivante</button>' +
+        '<button class="istex-results-pagination-next" title="Page suivante">Page suivante</button>' +
       '</div>'
     );
 

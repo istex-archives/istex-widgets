@@ -113,16 +113,34 @@ ol.istex-results-items {
   margin: auto;
   text-align: center;
   button {
-    //float: left;
+    border: medium none;
+    color: transparent;
+    height: 15px;
+    vertical-align: middle;
+    width: 15px;
+    cursor: pointer;
+  }
+  button.istex-results-pagination-prec {
+    background: url("istex-results-pagination-btn.png") no-repeat scroll 0 0 transparent;
+    margin-right: 10px;      
+  }
+  button.istex-results-pagination-next {
+    background: url("istex-results-pagination-btn.png") no-repeat scroll 0 0 transparent;
+    transform: rotate(180deg);
+    margin-left: 10px;   
   }
   ul {
     padding: 0; margin: 0;
     list-style-type: none;
+    display:inline-block;
+    color: #9c9d9f;
     li {
       padding: 0; margin: 0;
       list-style-type: none;
       margin-left: 2px;
       margin-right: 2px;
+      width:25px;
+      display:inline-block;
       //float: left;
       a {
         text-decoration: none;
