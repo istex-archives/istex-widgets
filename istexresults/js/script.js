@@ -145,11 +145,14 @@
     if (results.total > 0) {
       var queryTotalTime = (queryElapsedTime/1000).toFixed(2);
       var queryElasticSearchTime = 'Réseau : ' 
-        + ((queryElapsedTime - results.esReqStats.took)/1000).toFixed(2)
-        + ' sec, Moteur de recherche : '
-        + (results.esReqStats.took/1000).toFixed(2) + ' sec';
+        + ((queryElapsedTime -
+            results.stats.elasticsearch.took -
+            results.stats['istex-data'].took -
+            results.stats['istex-rp'].took)/1000).toFixed(2) + ' sec'
+        + ', Moteur de recherche : ' + (results.stats.elasticsearch.took/1000).toFixed(2) + ' sec'
+        + ', Traitements de l\'API : '
+        + ((results.stats['istex-data'].took + results.stats['istex-rp'].took)/1000).toFixed(2) + ' sec';
       var querySpeedHtml = '<span title="' + queryElasticSearchTime + '">(' + queryTotalTime + ' secondes)</span>';
-      //querySpeedHtml.attr('title', 'EEEE');
       if (self.selectedPage > 1) {
         stats.html('Page ' + self.selectedPage + ' sur environ '
           + niceNumber(results.total)
