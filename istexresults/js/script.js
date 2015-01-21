@@ -137,6 +137,13 @@
   Plugin.prototype.updateResultsInTheDom = function (results, istexSearch) {
     var self = this;
 
+    // not not fill anything in the results list
+    // if results are empty
+    if (!results) {
+      $(self.elt).empty();
+      return;
+    }
+
     // calculate the query time
     var queryElapsedTime = new Date() - istexSearch.queryStartTime;
 
@@ -241,10 +248,12 @@
     items.fadeIn();
 
     // handle the pagination element
-    self.updatePaginationInTheDom(
-      self.selectedPage || 1,
-      Math.ceil(results.total / self.settings.pageSize)
-    );
+    if (results.total > 0) {
+      self.updatePaginationInTheDom(
+        self.selectedPage || 1,
+        Math.ceil(results.total / self.settings.pageSize)
+      );
+    }
   };
 
   /**

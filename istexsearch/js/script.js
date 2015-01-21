@@ -59,7 +59,7 @@
           '</span>' +
         '</div>' +
         '<p class="istex-search-error"></p>' +
-        '<div class="istex-search-loading"></div>' +
+        '<div class="istex-search-loading" title="Recherche en cours"></div>' +
       '</form>'
       /*jshint ignore:end*/
     ).hide();
@@ -121,8 +121,9 @@
     // send the event telling a new query is sent
     $.event.trigger(self.settings.waitingForResultsEventName, [ self ]);
 
-    // show the loading bar
-    $(self.elt).find('.istex-search-loading').fadeIn();
+    // show the loading bar and hide the errors
+    $(self.elt).find('.istex-search-loading').show();
+    $(self.elt).find('.istex-search-error').hide();
 
     // send the request to the istex api
     self.istexApiRequester({
@@ -144,8 +145,11 @@
         $(self.elt).find('.istex-search-error').html(
           '<a href="https://api.istex.fr/corpus/">API Istex</a> non joignable.'
         );
-        $(self.elt).find('.istex-search-error').show();
+        $(self.elt).find('.istex-search-error').fadeIn();
         $(self.elt).find('.istex-search-loading').fadeOut();
+
+        // forward the empty results as a global event
+        $.event.trigger(self.settings.resultsEventName, [ null, self ]);
       }
     });
   };
