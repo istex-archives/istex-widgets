@@ -12,7 +12,7 @@ var istexConfigDefault = {
   showPagination: true,
 
   // nombre de résultats souhaités par page
-  pageSize: 50,
+  pageSize: 10,
 
   // nombre max de pages à montrer dans la zone de pagination
   maxPagesInPagination: 10,
