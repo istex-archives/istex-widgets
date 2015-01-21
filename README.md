@@ -28,8 +28,8 @@ Voici ce que ca peut donner sur une page quasi vierge :
     <link rel="stylesheet" href="//istex.github.io/themes/default/widgets.min.css" />
 
     <style>
-      #istex-widget-search, #istex-widget-results {
-          width: 600px;
+      #mysite-search, #mysite-results {
+        width: 600px;
       }
     </style>
 
@@ -37,20 +37,16 @@ Voici ce que ca peut donner sur une page quasi vierge :
   <body>
 
     <div id="mysite-auth"></div>
-    <script type="text/javascript">
-        $('#mysite-auth').istexAuth();
-    </script>
-
     <div id="mysite-search"></div>
-    <script type="text/javascript">
-        $('#mysite-search').istexSearch();
-    </script>
-
     <div id="mysite-results"></div>
-    <script type="text/javascript">
-        $('#mysite-results').istexResults();
-    </script>
 
+    <script type="text/javascript">
+      // charge les widgets dans les éléments HTML ciblés
+      $('#mysite-auth').istexAuth();
+      $('#mysite-search').istexSearch();
+      $('#mysite-results').istexResults();
+    </script>
+    
   </body>
 </html>
 ```
