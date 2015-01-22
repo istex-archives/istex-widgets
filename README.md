@@ -28,8 +28,8 @@ Voici ce que ca peut donner sur une page quasi vierge :
     <link rel="stylesheet" href="//istex.github.io/themes/default/widgets.min.css" />
 
     <style>
-      #istex-widget-search, #istex-widget-results {
-          width: 600px;
+      #mysite-search, #mysite-results {
+        width: 600px;
       }
     </style>
 
@@ -37,20 +37,16 @@ Voici ce que ca peut donner sur une page quasi vierge :
   <body>
 
     <div id="mysite-auth"></div>
-    <script type="text/javascript">
-        $('#mysite-auth').istexAuth();
-    </script>
-
     <div id="mysite-search"></div>
-    <script type="text/javascript">
-        $('#mysite-search').istexSearch();
-    </script>
-
     <div id="mysite-results"></div>
-    <script type="text/javascript">
-        $('#mysite-results').istexResults();
-    </script>
 
+    <script type="text/javascript">
+      // charge les widgets dans les éléments HTML ciblés
+      $('#mysite-auth').istexAuth();
+      $('#mysite-search').istexSearch();
+      $('#mysite-results').istexResults();
+    </script>
+    
   </body>
 </html>
 ```
@@ -70,6 +66,15 @@ var istexConfig = {
   // indiquer les mots à rechercher (argument de ?q= au niveau de l'api istex)
   query: "",
 
+  // il est possible de cacher la zone de pagination avec ce paramètre
+  showPagination: true,
+
+  // nombre de résultats souhaités par page
+  pageSize: 10,
+
+  // nombre max de pages à montrer dans la zone de pagination
+  maxPagesInPagination: 10,
+
   // le nombre max de caractères du résumé à afficher
   abstractLength: 250,
 
@@ -83,7 +88,14 @@ var istexConfig = {
   connectedEventName: "istex-connected",
 
   // le nom de l'évènement émit au moment d'une recherche    
-  resultsEventName: "istex-results"
+  resultsEventName: "istex-results",
+
+  // le nom de l'évènement émit au moment d'un changement de page
+  gotoPageEventName: "istex-gotopage",
+
+  // le nom de l'évènement émit a chaque fois qu'une recherche est envoyée
+  // et qui donnera probablement (sauf erreur) lieux à un event "istex-results"
+  waitingForResultsEventName: "istex-waiting-for-results"
 };
 ```
 
@@ -120,7 +132,7 @@ curl https://raw.githubusercontent.com/creationix/nvm/v0.20.0/install.sh | bash
 nvm install 0.10
 nvm use 0.10
 ```
-Exemple sous MacOSX :
+Exemple pour installer nodejs et npm sous MacOSX :
 ```
 brew install node
 ```
