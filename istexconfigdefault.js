@@ -26,6 +26,11 @@ var istexConfigDefault = {
   // le format qu'on souhaite voir s'ouvrir quand on clique sur le titre
   fullTextOnTitle: 'pdf',
   
+  // il est possible de cacher l'affichage de la vitesse de la requête
+  // ex: "Environ 8 933 993 résultats (0.24 secondes)"
+  //     si showQuerySpeed vaut false, "(0.24 secondes)" ne sera pas affiché
+  showQuerySpeed: true,
+
   // le nom de l'évènement émit au moment de l'authentification réussie
   connectedEventName: "istex-connected",
 

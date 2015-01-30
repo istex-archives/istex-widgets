@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Test ezproxy auth</title>
+
+    <!-- jQuery est une dépendances nécessaire -->
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/jquery-jsonp/src/jquery.jsonp.js"></script>
+    <script src="/bower_components/js-base64/base64.js"></script>
+
+    <!-- Charge la config par défault des widgets -->
+    <script type="text/javascript" src="/istexconfigdefault.js"></script>
+
+    <script type="text/javascript" src="/istexauth/js/script.js"></script>
+    <link rel="stylesheet/less" type="text/css" href="/istexauth/themes/default/style.less" />
+
+    <script type="text/javascript" src="/istexsearch/js/script.js"></script>
+    <link rel="stylesheet/less" type="text/css" href="/istexsearch/themes/default/style.less" />
+
+    <script type="text/javascript" src="/istexresults/js/script.js"></script>
+    <link rel="stylesheet/less" type="text/css" href="/istexresults/themes/default/style.less" />
+
+    <script> var less = { env: "development", async: true }; </script>
+    <script type="text/javascript" src="/bower_components/less/dist/less.min.js"></script>
+
+    <style>
+    #istex-widget-search, #istex-widget-results {
+      width: 600px;
+    }
+    </style>
+  </head>
+  <body>
+
+    <h1>Test ezproxy auth</h1>
+
+    <div id="istex-widget-auth"></div>
+    <div id="istex-widget-search"></div>
+    <div id="istex-widget-results"></div>
+
+    <script>
+      var istexConfig = {
+        istexApi: 'https://api-istex-fr.bases-doc.univ-lorraine.fr',
+        showQuerySpeed: false
+      };
+      $('#istex-widget-auth').istexAuth();
+      $('#istex-widget-search').istexSearch();
+      $('#istex-widget-results').istexResults();
+    </script>
+    
+  </body>
+</html>

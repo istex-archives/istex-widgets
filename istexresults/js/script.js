@@ -150,7 +150,9 @@
     // build the results statistics element
     var stats = self.tpl.stats.clone();
     if (results.total > 0) {
-      var querySpeedHtml, queryElapsedTime, queryElasticSearchTime = '';
+      var querySpeedHtml         = '';
+      var queryTotalTime         = 0;
+      var queryElasticSearchTime = '';
       var queryTotalTime = (queryElapsedTime/1000).toFixed(2);
       if (results.stats) {
           queryElasticSearchTime = 'Réseau : ' 
@@ -164,12 +166,13 @@
         } else {
           queryElasticSearchTime = 'Statistiques détaillées non disponibles';
         }
-        querySpeedHtml = '<span title="'
-          + queryElasticSearchTime
-          + '">('
-          + queryTotalTime
-          + ' secondes)</span>';
-
+        if (self.settings.showQuerySpeed) {
+          querySpeedHtml = '<span title="'
+            + queryElasticSearchTime
+            + '">('
+            + queryTotalTime
+            + ' secondes)</span>';
+        }
       if (self.selectedPage > 1) {
         stats.html('Page ' + self.selectedPage + ' sur environ '
           + niceNumber(results.total)

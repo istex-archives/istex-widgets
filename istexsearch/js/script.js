@@ -125,15 +125,21 @@
     $(self.elt).find('.istex-search-loading').show();
     $(self.elt).find('.istex-search-error').hide();
 
+    // prepare the request parameters
+    var queryString = {
+      q: query,
+      output: '*',
+      size: self.settings.pageSize,
+      from: ((pageIdx-1) * self.settings.pageSize)
+    };
+    if (self.settings.showQuerySpeed) {
+      queryString.stats = 1;
+    }
+
     // send the request to the istex api
     self.istexApiRequester({
       url: self.settings.istexApi + '/document/',
-      data: {
-        q: query,
-        output: '*',
-        size: self.settings.pageSize,
-        from: ((pageIdx-1) * self.settings.pageSize)
-      },
+      data: queryString,
       success: function(items) {
         // hide the error box and the loading box
         $(self.elt).find('.istex-search-error').hide();
