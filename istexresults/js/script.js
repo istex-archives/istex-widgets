@@ -1,4 +1,5 @@
 /* jshint -W117 */
+/* jshint -W083 */
 'use strict';
 
 /**
@@ -30,7 +31,9 @@
 
     self.tpl.pagination = $(
       '<div class="istex-results-pagination">' +
-        '<button class="istex-results-pagination-prec" title="Page précédente">Page précédente</button>' +
+        '<button class="istex-results-pagination-prec" title="Page précédente">' +
+          'Page précédente' +
+        '</button>' +
         '<ul class="istex-results-pagination-plist">' +
           '<li class="istex-results-pagination-page-selected">1</li>' +
           '<li>2</li>' +
@@ -43,7 +46,9 @@
           '<li>9</li>' +
           '<li>10</li>' +
         '</ul>' +
-        '<button class="istex-results-pagination-next" title="Page suivante">Page suivante</button>' +
+        '<button class="istex-results-pagination-next" title="Page suivante">' +
+          'Page suivante' +
+        '</button>' +
       '</div>'
     );
 
@@ -153,16 +158,18 @@
       var querySpeedHtml         = '';
       var queryTotalTime         = 0;
       var queryElasticSearchTime = '';
-      var queryTotalTime = (queryElapsedTime/1000).toFixed(2);
+      queryTotalTime = (queryElapsedTime/1000).toFixed(2);
       if (results.stats) {
           queryElasticSearchTime = 'Réseau : ' 
             + ((queryElapsedTime -
                 results.stats.elasticsearch.took -
                 results.stats['istex-data'].took -
                 results.stats['istex-rp'].took)/1000).toFixed(2) + ' sec'
-            + ', Moteur de recherche : ' + (results.stats.elasticsearch.took/1000).toFixed(2) + ' sec'
+            + ', Moteur de recherche : '
+            + (results.stats.elasticsearch.took/1000).toFixed(2) + ' sec'
             + ', Traitements de l\'API : '
-            + ((results.stats['istex-data'].took + results.stats['istex-rp'].took)/1000).toFixed(2) + ' sec';
+            + ((results.stats['istex-data'].took + results.stats['istex-rp'].took)/1000).toFixed(2)
+            + ' sec';
         } else {
           queryElasticSearchTime = 'Statistiques détaillées non disponibles';
         }
