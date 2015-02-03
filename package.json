@@ -35,10 +35,10 @@
     "http-server": "^0.7.3",
     "mocha": "^2.0.1",
     "mocha-jshint": "0.0.9",
-    "zombie": "^2.4.0"
-  },
-  "dependencies": {
+    "zombie": "^2.4.0",
     "glob": "^4.3.4",
     "gulp-clean": "^0.3.1"
+  },
+  "dependencies": {
   }
 }
