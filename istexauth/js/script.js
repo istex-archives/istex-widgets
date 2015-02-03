@@ -26,7 +26,7 @@
     var self = this;
 
     // first of all, check which auth system is available
-    self.getAuthMode(function (err, needAuth, authMode) {
+    self.getAuthMode({}, function (err, needAuth, authMode) {
       if (needAuth == 'none') {
         self.setupGenericRequester(authMode);
         self.removeConnectBtn();
@@ -66,14 +66,21 @@
    * - ajax
    * - jsonp
    */
-  Plugin.prototype.getAuthMode = function (cb) {
+  Plugin.prototype.getAuthMode = function (options, cb) {
     var self = this;
+    options = $.extend({ showWaitingIcon: true}, options);
 
-   // try to auth on the API with AJAX
+    // display a small text+icon to make the user wait
+    if (options && options.showWaitingIcon) {
+      self.showLoadingIcon();
+    }
+
+    // try to auth on the API with AJAX
     $.ajax({
       url: self.settings.istexApi + '/corpus/',
       success: function () {
         // if success it means auth is ok
+        self.hideLoadingIcon();
         return cb(null, 'none', 'ajax');
       },
       error: function (opt, err) {
@@ -86,14 +93,17 @@
             url: self.settings.istexApi + '/corpus/',
             callbackParameter: "callback",
             success: function () {
+              self.hideLoadingIcon();
               cb(null, 'none', 'jsonp');
             },
             error: function () {
+              self.hideLoadingIcon();
               cb(null, 'redirect', 'jsonp');   
             }
           });
         } else {
           // other code are interpreted as 401
+          self.hideLoadingIcon();
           return cb(null, 'http', 'ajax');
         }
       }
@@ -115,7 +125,7 @@
 
       // check again auth when the user come back on the origin page
       $(window).focus(function () {
-        self.getAuthMode(function (err, needAuth, authMode) {
+        self.getAuthMode({ showWaitingIcon: false }, function (err, needAuth, authMode) {
           if (needAuth == 'none') {
             cb(null);
           } else {
@@ -150,6 +160,31 @@
   Plugin.prototype.removeConnectBtn = function (cb) {
     var self = this;
     $(self.elt).find('.istex-ezproxy-auth-btn').remove();
+  };
+
+  /**
+   * Show a loading visual information
+   * telling ISTEX widget is loading
+   */
+  Plugin.prototype.showLoadingIcon = function () {
+    var self = this;
+    if ($(self.elt).find('.istex-loading').length > 0) {
+      $(self.elt).find('.istex-loading').show();
+      return;
+    }
+    var loadingIcon = $(
+      '<div class="istex-loading">' +
+        '<div class="istex-loading-waiting"></div>' +
+        '<p>Chargement en cours</p>' +
+        '<div class="istex-loading-logo"></div>' +
+      '</div>'
+    ).show();
+    $(self.elt).append(loadingIcon);
+  };
+  Plugin.prototype.hideLoadingIcon = function (cb) {
+    var self = this;
+    $(self.elt).find('.istex-loading').hide();
+    $(self.elt).find('.istex-loading').remove();
   };
 
   /**
