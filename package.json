@@ -4,7 +4,7 @@
   "description": "Widgets Istex",
   "main": "index.js",
   "scripts": {
-    "test": "npm i ; npm i-g gulp ; gulp test"
+    "test": "npm i ; npm i -g gulp ; gulp test"
   },
   "repository": {
     "type": "git",
