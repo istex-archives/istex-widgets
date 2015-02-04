@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# Script used to sync the latest version from
+# istex-widgets repository to
+# istex.github.io repository (dist repository)
+#
+# It also creates a latest tag on the dist repository
+#
+
+set -e
+
+REPOSITORY_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+cd REPOSITORY_PATH
+
+# get the latest version on the istex-widgets repository
+git fetch --tags
+LATEST_VERSION=$(git describe --abbrev=0 --tags)
+#LATEST_COMMITID=$(git rev-list -1 $LATEST_VERSION)
+
+# check if latest version is on dist/
+# if not, create the tag on dist
+cd dist/
+git rev-list -1 $LATEST_VERSION 2>/dev/null
+if [ ! $? -eq 0 ]; then
+  git fetch --tags
+  
+  git tag -d latest
+  git push origin :latest
+  git tag -a -m "Version $VERSION" latest
+  git tag -a -m "Version $LATEST_VERSION" $LATEST_VERSION
+  git push --tags
+fi
