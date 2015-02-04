@@ -1,0 +1,60 @@
+#!/bin/bash
+#
+# Script used to make available multi version
+# at istex.github.io and widgets.istex.io
+# il will generate folders this way: 
+# - js/widgets.min.js
+# - themes/default/widgets.min.css
+# - latest/js/widgets.min.js
+# - latest/themes/default/widgets.min.css
+# - v1.2.1/js/widgets.min.js
+# - v1.2.1/themes/default/widgets.min.css
+# - v1.1.0/js/widgets.min.js
+# - v1.1.0/themes/default/widgets.min.css
+#
+
+set -e
+
+DIST_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )/../dist" && pwd )
+cd $DIST_PATH
+
+# check we are on the right repository
+REPOSITORY_URL=$(git config --get remote.origin.url)
+if [ $REPOSITORY_URL != "git@github.com:istex/istex.github.io.git" ]; then
+  echo "Error: $(pwd) is not a clone of git@github.com:istex/istex.github.io.git"
+  exit 1
+fi
+git pull --tags
+
+# loop over versions
+# and create a folder for each versions
+for VERSION in $(git tag)
+do
+  echo "Creating $VERSION/"
+  git archive --format=tar --prefix=$VERSION/ $VERSION | tar x
+done
+exit
+
+# get the latest version on the istex-widgets repository
+git fetch --tags
+LATEST_VERSION=$(git describe --abbrev=0 --tags)
+
+# check if latest version is on dist/
+# if not, create the tag on dist
+cd dist/
+set +e
+git rev-list -1 $LATEST_VERSION 2>/dev/null 1>/dev/null
+if [ ! $? -eq 0 ]; then
+  set -e
+  echo "Creating $LATEST_VERSION version on dist/ repository"
+  git fetch --tags
+  
+  git tag -d latest
+  git push origin :latest
+  git tag -a -m "Version $VERSION" latest
+  git tag -a -m "Version $LATEST_VERSION" $LATEST_VERSION
+  git push --tags
+  echo "Version $LATEST_VERSION created on dist/ repository"
+else
+  echo "Version $LATEST_VERSION already created on dist/ repository"
+fi
