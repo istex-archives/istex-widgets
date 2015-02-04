@@ -267,9 +267,9 @@ gulp.task('https', [ 'bower' ], function () {
   var server = httpServer.createServer({
     root: __dirname,
     https: {
-      cert: __dirname + '/tmp/test.pem',
-      key:  __dirname + '/tmp/test.key',
-      ca:   __dirname + '/tmp/test.pem'
+      cert: __dirname + '/tools/test.pem',
+      key:  __dirname + '/tools/test.key',
+      ca:   __dirname + '/tools/test.pem'
     }
   });
   server.listen(8080, '127.0.0.1', function () {
