@@ -15,13 +15,15 @@ cd $REPOSITORY_PATH
 # get the latest version on the istex-widgets repository
 git fetch --tags
 LATEST_VERSION=$(git describe --abbrev=0 --tags)
-#LATEST_COMMITID=$(git rev-list -1 $LATEST_VERSION)
 
 # check if latest version is on dist/
 # if not, create the tag on dist
 cd dist/
-git rev-list -1 $LATEST_VERSION 2>/dev/null
+set +e
+git rev-list -1 $LATEST_VERSION 2>/dev/null 1>/dev/null
 if [ ! $? -eq 0 ]; then
+  set -e
+  echo "Creating $LATEST_VERSION version on dist/ repository"
   git fetch --tags
   
   git tag -d latest
@@ -29,4 +31,7 @@ if [ ! $? -eq 0 ]; then
   git tag -a -m "Version $VERSION" latest
   git tag -a -m "Version $LATEST_VERSION" $LATEST_VERSION
   git push --tags
+  echo "Version $LATEST_VERSION created on dist/ repository"
+else
+  echo "Version $LATEST_VERSION already created on dist/ repository"
 fi
