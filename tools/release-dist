@@ -9,8 +9,8 @@
 
 set -e
 
-REPOSITORY_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-cd REPOSITORY_PATH
+REPOSITORY_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )
+cd $REPOSITORY_PATH
 
 # get the latest version on the istex-widgets repository
 git fetch --tags
