@@ -1,6 +1,6 @@
 {
   "name": "widget.istex.fr",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Widgets Istex",
   "main": "index.js",
   "scripts": {
