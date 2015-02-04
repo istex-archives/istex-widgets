@@ -173,3 +173,32 @@ Pour déployer les widgets sur le site [istex.github.io](http://istex.github.io/
 ```
 gulp deploy
 ```
+
+### Créer et publier une nouvelle version des widgets
+
+Le [semantic versioning](http://semver.org/) est utilisé pour la nomenclature des versions. Pour incrémenter la version au niveau "patch" (c'est à dire une petite modification), on utilise npm de façon classique :
+
+```
+npm version patch
+git push --tags
+./tools/
+```
+
+Ensuite pour déployer cette version aux utilisateurs finaux. Il est nécessaire de déployer la version sur le dépôt [istex.github.io](http://istex.github.io/) qui est accessible dans le répertoire ''dist/''. Voici comme déployer la version sur dist/:
+
+```
+./tools/release-dist
+```
+
+[EN COURS DE MISE EN PLACE] Au final, l'utilisateur pourra accéder aux différentes version des widgets sur http://widgets.istex.fr/ de cette façon :
+- Par exemple pour utiliser la dernière version des widgets, les fichiers sont présent ici :
+  - http://widgets.istex.fr/latest/js/widgets.min.js
+  - http://widgets.istex.fr/latest/themes/default/widgets.min.css
+- Par exemple pour utiliser la version v1.1.0 des widgets, les fichiers sont présent ici :
+  - http://widgets.istex.fr/v1.1.0/js/widgets.min.js
+  - http://widgets.istex.fr/v1.1.0/themes/default/widgets.min.css
+- Par exemple pour utiliser la version en cours de dev des widgets (version potentiellement instable), les fichiers sont présents ici :
+  - http://widgets.istex.fr/js/widgets.min.js
+  - http://widgets.istex.fr/themes/default/widgets.min.css
+
+
