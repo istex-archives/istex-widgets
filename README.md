@@ -155,6 +155,13 @@ npm install -g gulp bower
 gulp init
 ```
 
+De façon alternative (pour les utilisateurs Windows), il est possible de :
+```
+cd istex-widgets/
+npm install -g http-server bower
+bower install
+```
+
 Vous êtes alors opérationels pour développer votre contribution.
 
 ### Tester, compiler et déployer
@@ -162,7 +169,9 @@ Vous êtes alors opérationels pour développer votre contribution.
 Pour développer et tester les widgets depuis votre navigateur Web, le plus simple est de lancer un mini serveur Web avec la commande suivante :
 ```
 gulp http
+# pour windows la commande suivante: http-server
 ```
+
 Puis ouvrez les URL qui s'affichent dans votre navigateur. Exemple: http://127.0.0.1:8080/index.html pour une vue d'ensemble.
 
 Les tests unitaires se trouvent dans le répertoire ''./test/'' (le [framework mocha](http://mochajs.org/) est utilisé), pour les exécuter, tapez :
