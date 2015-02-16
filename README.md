@@ -137,6 +137,10 @@ Exemple pour installer nodejs et npm sous MacOSX :
 brew install node
 ```
 
+Sous windows, télécharger et installer nodejs et git depuis leurs sites :
+- http://nodejs.org/download/
+- http://git-scm.com/download/win
+
 Récupérer le dépôt git des widgets Istex :
 ```
 git clone git@github.com:istex/widget.istex.fr.git
