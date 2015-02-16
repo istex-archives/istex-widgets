@@ -143,12 +143,12 @@ Sous windows, télécharger et installer nodejs et git depuis leurs sites :
 
 Récupérer le dépôt git des widgets Istex :
 ```
-git clone git@github.com:istex/widget.istex.fr.git
+git clone git@github.com:istex/istex-widgets.git
 ```
 
 Initialiser les dépendances (gulp est l'outil de build) :
 ```
-cd widget.istex.fr/
+cd istex-widgets/
 npm install
 npm install -g gulp bower
 gulp init
