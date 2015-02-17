@@ -17,10 +17,14 @@
   },
   "homepage": "https://github.com/istex/widget.istex.fr",
   "devDependencies": {
+    "async": "^0.9.0",
     "chai": "^1.10.0",
     "event-stream": "^3.1.7",
+    "express": "^4.11.2",
+    "glob": "^4.3.4",
     "gulp": "^3.8.10",
     "gulp-bower": "0.0.7",
+    "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.4.2",
     "gulp-csso": "^0.2.9",
     "gulp-git": "^0.5.5",
@@ -35,9 +39,11 @@
     "http-server": "^0.7.3",
     "mocha": "^2.0.1",
     "mocha-jshint": "0.0.9",
-    "zombie": "^2.4.0",
-    "glob": "^4.3.4",
-    "gulp-clean": "^0.3.1"
+    "nconf": "^0.7.1",
+    "zombie": "^2.4.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash": "^3.2.0",
+    "superagent": "^0.21.0"
+  }
 }
