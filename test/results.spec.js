@@ -1,19 +1,11 @@
-var httpServer = require('http-server');
-var Browser    = require('zombie');
-var assert     = require('chai').assert;
+var httpServer    = require('http-server');
+var Browser       = require('zombie');
+var assert        = require('chai').assert;
+var istexApiFaker = require('istex-api-faker');
+
 
 describe('Istex results widget', function () {
-  before(function (done) {
-    var self = this;
-    self.server = httpServer.createServer({
-      root: __dirname + '/../'
-    });
-    self.server.listen(3000, '127.0.0.1', function () {
-      self.browser = new Browser({ site: 'http://127.0.0.1:3000' });
-      self.browser.silent = true;
-      done();
-    });
-  });
+  before(require('./lib/before.js'));
 
   // visit the search test page
   before(function (done) {
@@ -23,7 +15,7 @@ describe('Istex results widget', function () {
   it('should show have an input form with "query" value', function () {
     assert.ok(this.browser.success);
     assert.ok(this.browser.query('input.istex-search-input'));
-    assert.equal(this.browser.query('input.istex-search-input').type, 'text');
+    assert.equal(this.browser.query('input.istex-search-input').type, 'search');
     assert.equal(this.browser.query('input.istex-search-input').value, 'brain');
   });
 
@@ -44,13 +36,8 @@ describe('Istex results widget', function () {
 
   it('should have results containing data', function () {
     assert.ok(this.browser.success);
-    assert.equal(
-      this.browser.text('ol.istex-results-items li:first-child a.istex-results-item-title'),
-      'Biomechanical Simulation of Electrode Migration for Deep Brain Stimulation'
-    );
+    assert.isString(this.browser.text('ol.istex-results-items li:first-child a.istex-results-item-title'));
   });
 
-  after(function () {
-    this.server.close();
-  });
+  after(require('./lib/after.js'));
 });

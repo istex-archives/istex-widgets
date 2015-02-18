@@ -4,6 +4,13 @@
         <meta charset="utf-8" />
         <title>istexSearch test</title>
 
+        <script>
+            var istexConfig = {};
+            if (window.navigator.userAgent == 'zombiejs') {
+                istexConfig.istexApi = 'http://127.0.0.1:35001';
+            }
+        </script>
+
         <!-- jQuery est une dépendances nécessaire -->
         <script src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/bower_components/jquery-jsonp/src/jquery.jsonp.js"></script>
@@ -21,7 +28,7 @@
         <script type="text/javascript" src="/istexresults/js/script.js"></script>
         <link rel="stylesheet/less" type="text/css" href="/istexresults/themes/default/style.less" />
 
-        <script> var less = { env: "development", async: true }; </script>
+        <script> var less = { env: "development", async: true, logLevel: 1 }; </script>
         <script type="text/javascript" src="/bower_components/less/dist/less.min.js"></script>
 
         <style>
@@ -35,21 +42,13 @@
         <h1>istexResults test</h1>
         
         <div id="istex-widget-auth"></div>
-        <script type="text/javascript">
-          $('#istex-widget-auth').istexAuth();
-        </script>
-
         <div id="istex-widget-search"></div>
-        <script type="text/javascript">
-          $('#istex-widget-search').istexSearch({ query: 'brain' });
-        </script>
-
-        <!-- for debug -->
         <div id="istex-widget-results"></div>
         <script type="text/javascript">
+          $('#istex-widget-auth').istexAuth();
+          $('#istex-widget-search').istexSearch({ query: 'brain' });
           $('#istex-widget-results').istexResults();
         </script>
-
 
     </body>
 </html>
