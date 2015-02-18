@@ -1,5 +1,5 @@
 {
-  "name": "widget.istex.fr",
+  "name": "istex-widgets",
   "version": "1.1.2",
   "description": "Widgets Istex",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/istex/widget.istex.fr.git"
+    "url": "https://github.com/istex/istex-widgets.git"
   },
   "author": "",
   "license": "CeCILL",
   "bugs": {
-    "url": "https://github.com/istex/widget.istex.fr/issues"
+    "url": "https://github.com/istex/istex-widgets/issues"
   },
-  "homepage": "https://github.com/istex/widget.istex.fr",
+  "homepage": "https://github.com/istex/istex-widgets",
   "devDependencies": {
     "async": "^0.9.0",
     "chai": "^1.10.0",
