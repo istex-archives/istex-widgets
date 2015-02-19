@@ -8,6 +8,9 @@ var istexConfigDefault = {
   // indiquer les mots à rechercher (argument de ?q= au niveau de l'api istex)
   query: "",
 
+  // il est possible de ne charger que certaines facettes
+  facetsToLoad: [ 'corpus' ],
+
   // il est possible de cacher la zone de pagination avec ce paramètre
   showPagination: true,
 

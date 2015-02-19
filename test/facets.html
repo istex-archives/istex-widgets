@@ -2,13 +2,15 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>istexSearch test</title>
+        <title>istexFacets test</title>
 
         <script>
-            var istexConfig = { facetsToLoad: [] };
+            var istexConfig = {};
             if (window.navigator.userAgent == 'zombiejs') {
                 istexConfig.istexApi = 'http://127.0.0.1:35001';
             }
+
+            istexConfig.istexApi = 'https://api-istex-fr.bases-doc.univ-lorraine.fr';
         </script>
 
         <!-- jQuery est une dépendances nécessaire -->
@@ -25,6 +27,12 @@
         <script type="text/javascript" src="/istexsearch/js/script.js"></script>
         <link rel="stylesheet/less" type="text/css" href="/istexsearch/themes/default/style.less" />
 
+        <script type="text/javascript" src="/istexresults/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/istexresults/themes/default/style.less" />
+
+        <script type="text/javascript" src="/istexfacets/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/istexfacets/themes/default/style.less" />
+
         <script> var less = { env: "development", async: true, logLevel: 1 }; </script>
         <script type="text/javascript" src="/bower_components/less/dist/less.min.js"></script>
 
@@ -32,29 +40,27 @@
         #istex-widget-search {
             width: 600px;
         }
+        #istex-widget-facets {
+            width: 12em;
+        }
+        #istex-widget-results {
+            width: 600px;
+        }
         </style>
     </head>
     <body>
 
-        <h1>istexSearch test</h1>
-        
-       <div id="istex-widget-auth"></div>
+        <h1>istexFacets test</h1>
+
+        <div id="istex-widget-auth"></div>
+        <div id="istex-widget-search"></div>
+        <div id="istex-widget-facets"></div>
+        <div id="istex-widget-results"></div>
         <script type="text/javascript">
           $('#istex-widget-auth').istexAuth();
-        </script>
-
-        <div id="istex-widget-search"></div>
-        <script type="text/javascript">
-            $('#istex-widget-search').istexSearch();
-        </script>
-
-        <!-- for debug -->
-        <div id="istex-results-in-dom"></div>
-        <script type="text/javascript">
-            //$("#istex-results-in-dom").hide();
-            $(document).bind('istex-results', function (event, items) {
-                $("#istex-results-in-dom").text(JSON.stringify(items));
-            });
+          $('#istex-widget-search').istexSearch({ query: 'brain' });
+          $('#istex-widget-results').istexResults();
+          $('#istex-widget-facets').istexFacets();
         </script>
 
     </body>

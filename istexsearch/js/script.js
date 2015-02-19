@@ -133,13 +133,15 @@
     var queryString = {
       q: queryOptions.q,
       output: '*',
-      facet: 'corpus',
       size: self.settings.pageSize,
       from: ((pageIdx-1) * self.settings.pageSize)
     };
     queryString = $.extend(queryOptions, queryString);
     if (self.settings.showQuerySpeed) {
       queryString.stats = 1;
+    }
+    if (self.settings.facetsToLoad && self.settings.facetsToLoad.length > 0) {
+      queryString.facet = self.settings.facetsToLoad.join(',');
     }
 
     // send the request to the istex api
