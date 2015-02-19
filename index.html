@@ -4,22 +4,25 @@
         <meta charset="utf-8" />
         <title>Démonstration d'utilisation des widgets Istex</title>
 
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
-        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
         <!-- Config Istex -->
         <script>
-            var istexConfig = {
-//                istexApi: 'https://api-istex-fr.bases-doc.univ-lorraine.fr'
-            };
+            var istexConfig = {};
+
+            // charge avec l'ezproxy de l'ul si on ajoute #ul dans l'URL
+            if (document.location.hash == '#ul') {
+                istexConfig.istexApi = 'https://api-istex-fr.bases-doc.univ-lorraine.fr';
+            }
         </script>
 
         <!-- jQuery est une dépendances nécessaire -->
         <script src="/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/bower_components/jquery-jsonp/src/jquery.jsonp.js"></script>
         <script src="/bower_components/js-base64/base64.js"></script>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
         <!-- Charge la config par défault des widgets -->
         <script type="text/javascript" src="/istexconfigdefault.js"></script>
