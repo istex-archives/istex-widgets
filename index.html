@@ -12,6 +12,10 @@
             if (document.location.hash == '#ul') {
                 istexConfig.istexApi = 'https://api-istex-fr.bases-doc.univ-lorraine.fr';
             }
+            // charge avec l'ezproxy bibliovie de l'inist si on ajoute #inist dans l'URL
+            if (document.location.hash == '#inist') {
+                istexConfig.istexApi = 'https://api-istex-fr.gate1.inist.fr';
+            }
         </script>
 
         <!-- jQuery est une dépendances nécessaire -->
@@ -49,7 +53,27 @@
 
       <div class="blog-header">
         <h1 class="blog-title">Démonstration d'utilisation des widgets Istex</h1>
-        <p class="lead blog-description">Intégration des widgets Istex dans un site réalisé avec <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
+        <p class="lead blog-description">Cette page Web est réalisée à l'aide de <a href="http://getbootstrap.com/">Bootstrap</a>. Elle montre comment les <a href="https://github.com/istex/istex-widgets">widgets Istex</a> peuvent y être intégrés.
+        <br/>
+        Le contrôle d'accès à l'Istex fonctionne par <a href="#" class="reload">login/mot de passe</a> mais peut également fonctionner avec par exemple l'<a href="#ul" class="reload">ezproxy de l'Université de Lorraine</a> ou bien l'<a href="#inist" class="reload">ezproxy bibliovie du CNRS</a>.</p>
+      </div>
+      <script>
+        // recharge la page avec le fragment dans l'URL permettant
+        // de basculer sur un mode d'authentification ou un autre
+        $('a.reload').click(function () {
+          console.log($(this).attr('href'));
+          document.location =
+            document.location.origin +
+            document.location.pathname +
+            '?' + Math.round(Math.random()*1000) + $(this).attr('href');
+        });
+      </script>
+
+      <div class="row">
+        <div class="col-sm-11 blog-main">
+            <div id="istex-widget-auth"></div>
+            <div id="istex-widget-search"></div>
+        </div>
       </div>
 
       <div class="row">
@@ -58,16 +82,15 @@
 
           <div class="blog-post">
 
-            <div id="istex-widget-auth"></div>
-            <div id="istex-widget-search"></div>
             <div id="istex-widget-results"></div>
 
           </div><!-- /.blog-post -->
 
         </div><!-- /.blog-main -->
 
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <div class="col-sm-3 blog-sidebar">
           <div class="sidebar-module sidebar-module-inset">
+            <br/>
             <div id="istex-widget-facets"></div>
           </div>
         </div><!-- /.blog-sidebar -->
