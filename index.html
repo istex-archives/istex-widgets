@@ -2,7 +2,19 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Démonstration d'utilisation des widgets ISTEX</title>
+        <title>Démonstration d'utilisation des widgets Istex</title>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- Config Istex -->
+        <script>
+            var istexConfig = {
+//                istexApi: 'https://api-istex-fr.bases-doc.univ-lorraine.fr'
+            };
+        </script>
 
         <!-- jQuery est une dépendances nécessaire -->
         <script src="/bower_components/jquery/dist/jquery.min.js"></script>
@@ -12,43 +24,61 @@
         <!-- Charge la config par défault des widgets -->
         <script type="text/javascript" src="/istexconfigdefault.js"></script>
 
-        <!-- Charge le widget istexAuth -->
         <script type="text/javascript" src="/istexauth/js/script.js"></script>
         <link rel="stylesheet/less" type="text/css" href="/istexauth/themes/default/style.less" />
 
-        <!-- Charge le widget istexSearch -->
         <script type="text/javascript" src="/istexsearch/js/script.js"></script>
         <link rel="stylesheet/less" type="text/css" href="/istexsearch/themes/default/style.less" />
 
-        <!-- Charge le widget istexResults -->
         <script type="text/javascript" src="/istexresults/js/script.js"></script>
         <link rel="stylesheet/less" type="text/css" href="/istexresults/themes/default/style.less" />
 
-        <!-- Compilation des LESS en CSS (pour le développement) -->
-        <script> var less = { env: "development", async: true }; </script>
+        <script type="text/javascript" src="/istexfacets/js/script.js"></script>
+        <link rel="stylesheet/less" type="text/css" href="/istexfacets/themes/default/style.less" />
+
+        <script> var less = { env: "development", async: true, logLevel: 1 }; </script>
         <script type="text/javascript" src="/bower_components/less/dist/less.min.js"></script>
 
-        <style>
-        #mysite-istex-search, #mysite-istex-results, #mysite-istex-auth {
-            font-family: sans-serif;
-            width: 600px;
-        }
-        </style>
     </head>
     <body>
 
-        <h1>Exemple d'utilisation des widgets ISTEX</h1>
+    <div class="container">
 
-        <div id="mysite-istex-auth"></div>
-        <div id="mysite-istex-search"></div>
-        <div id="mysite-istex-results"></div>
-        <div id="mysite-istex-facets"></div>
-        <script type="text/javascript">
-            $('#mysite-istex-auth').istexAuth();
-            $('#mysite-istex-search').istexSearch();
-            $('#mysite-istex-results').istexResults();
-            $('#mysite-istex-facets').istexFacets();
-        </script>
+      <div class="blog-header">
+        <h1 class="blog-title">Démonstration d'utilisation des widgets Istex</h1>
+        <p class="lead blog-description">Intégration des widgets Istex dans un site réalisé avec <a href="http://getbootstrap.com/">Bootstrap</a>.</p>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+
+            <div id="istex-widget-auth"></div>
+            <div id="istex-widget-search"></div>
+            <div id="istex-widget-results"></div>
+
+          </div><!-- /.blog-post -->
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <div id="istex-widget-facets"></div>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <script type="text/javascript">
+      $('#istex-widget-auth').istexAuth();
+      $('#istex-widget-search').istexSearch();
+      $('#istex-widget-results').istexResults();
+      $('#istex-widget-facets').istexFacets();
+    </script>
 
     </body>
 </html>
