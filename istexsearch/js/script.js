@@ -36,7 +36,7 @@
 
     // listen istex-gotopage event
     $(document).bind(self.settings.gotoPageEventName, function (event, pageIdx) {
-      self.execQuery(null, pageIdx);
+      self.execQuery({}, pageIdx);
     });
 
   };
@@ -75,7 +75,7 @@
       var query = $(self.elt).find('input.istex-search-input').val().trim();
       query = query ? query : '*';
       
-      self.execQuery(query);
+      self.execQuery({ q: query });
       
       return false;
     }); // end of ('.istex-search-form').submit(
@@ -102,17 +102,18 @@
   /**
    * Execute a query
    */
-  Plugin.prototype.execQuery = function (query, pageIdx) {
+  Plugin.prototype.execQuery = function (queryOptions, pageIdx) {
     var self = this;
 
-    // if no page id selected the setup one
-    pageIdx = pageIdx || 1;
+    // default vaules
+    pageIdx      = pageIdx || 1;
+    queryOptions = queryOptions || {};
 
     // if no query selected try to take the latest one
-    if (query) {
-      self.query = query;
+    if (queryOptions.q) {
+      self.query = queryOptions.q;
     } else {
-      query = self.query;
+      queryOptions.q = self.query;
     }
 
     // set the timer to know when the query has been done (ex: to have the query time)
@@ -127,11 +128,13 @@
 
     // prepare the request parameters
     var queryString = {
-      q: query,
+      q: queryOptions.q,
       output: '*',
+      facet: 'corpus',
       size: self.settings.pageSize,
       from: ((pageIdx-1) * self.settings.pageSize)
     };
+    queryString = $.extend(queryOptions, queryString);
     if (self.settings.showQuerySpeed) {
       queryString.stats = 1;
     }
