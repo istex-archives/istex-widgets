@@ -97,7 +97,10 @@
     var self = this;
 
     // check if we can return a corpus facet
-    if (!results || !results.aggregations || !results.aggregations.corpus || !results.aggregations.corpus.buckets) {
+    if (!results ||
+        !results.aggregations ||
+        !results.aggregations.corpus ||
+        !results.aggregations.corpus.buckets) {
       return null;
     }
 
@@ -156,7 +159,7 @@
     } else {
       self.selectedCorpus.push(corpus);
     }
-  }
+  };
 
   // A really lightweight plugin wrapper around the constructor,
   // preventing against multiple instantiations

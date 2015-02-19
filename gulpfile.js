@@ -9,7 +9,7 @@
  * - concaténer les js et css pour la version "all-in-one"
  */
 
-var widgets = [ 'istexauth', 'istexsearch', 'istexresults' ];
+var widgets = [ 'istexauth', 'istexsearch', 'istexresults', 'istexfacets' ];
 var themes  = [ 'default' ];
 
 var gulp       = require("gulp");

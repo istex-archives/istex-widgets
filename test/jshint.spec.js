@@ -1,1 +1,1 @@
-require('mocha-jshint')([ './istexauth/', './istexsearch/', './istexresults/' ]);
+require('mocha-jshint')([ './istexauth/', './istexsearch/', './istexresults/', './istexfacets/' ]);
