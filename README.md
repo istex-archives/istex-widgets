@@ -14,10 +14,10 @@ Voici ce que ca peut donner sur une page quasi vierge :
 ```html
 <html>
   <head>
-    
+
     <!-- jQuery est une dépendance nécessaire -->
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    
+
     <!-- Charge les widgets Istex -->
     <script type="text/javascript">
       var istexConfig = {
@@ -38,15 +38,17 @@ Voici ce que ca peut donner sur une page quasi vierge :
 
     <div id="mysite-auth"></div>
     <div id="mysite-search"></div>
+    <div id="mysite-facets"></div>
     <div id="mysite-results"></div>
 
     <script type="text/javascript">
       // charge les widgets dans les éléments HTML ciblés
       $('#mysite-auth').istexAuth();
       $('#mysite-search').istexSearch();
+      $('#mysite-facets').istexFacets();
       $('#mysite-results').istexResults();
     </script>
-    
+
   </body>
 </html>
 ```
@@ -59,12 +61,15 @@ Les widgets peuvent être paramétrés en positionnant les clés/valeurs de la v
 var istexConfig = {
   // l'adresse de l'API de l'Istex
   // pour une ezproxyfication, réglez ici l'adresse ezproxyfiée
-  // ex à l'UL: https://api-istex-fr.bases-doc.univ-lorraine.fr 
+  // ex à l'UL: https://api-istex-fr.bases-doc.univ-lorraine.fr
   istexApi: 'https://api.istex.fr',
-  
+
   // pour lancer une recherche au chargement de la page
   // indiquer les mots à rechercher (argument de ?q= au niveau de l'api istex)
   query: "",
+
+  // il est possible de ne charger que certaines facettes
+  facetsToLoad: [ 'corpus' ],
 
   // il est possible de cacher la zone de pagination avec ce paramètre
   showPagination: true,
@@ -83,17 +88,33 @@ var istexConfig = {
 
   // le format qu'on souhaite voir s'ouvrir quand on clique sur le titre
   fullTextOnTitle: 'pdf',
-  
-  // le nom de l'évènement émit au moment de l'authentification réussie
+
+  // il est possible de cacher l'affichage de la vitesse de la requête
+  // ex: "Environ 8 933 993 résultats (0.24 secondes)"
+  //     si showQuerySpeed vaut false, "(0.24 secondes)" ne sera pas affiché
+  showQuerySpeed: true,
+
+  // les différents textes paramétrables
+  labels: {
+    facets: {
+      'title' : 'Affiner votre recherche',
+      'corpus' : 'Corpus',
+    }
+  },
+
+  // le nom de l'événement émit au moment de l'authentification réussie
   connectedEventName: "istex-connected",
 
-  // le nom de l'évènement émit au moment d'une recherche    
+  // le nom de l'événement émit au moment où une nouvelle recherche est envoyée
+  newSearchEventName: "istex-search",
+
+  // le nom de l'événement émit au moment d'une recherche
   resultsEventName: "istex-results",
 
-  // le nom de l'évènement émit au moment d'un changement de page
+  // le nom de l'événement émit au moment d'un changement de page
   gotoPageEventName: "istex-gotopage",
 
-  // le nom de l'évènement émit a chaque fois qu'une recherche est envoyée
+  // le nom de l'événement émit a chaque fois qu'une recherche est envoyée
   // et qui donnera probablement (sauf erreur) lieux à un event "istex-results"
   waitingForResultsEventName: "istex-waiting-for-results"
 };
@@ -119,6 +140,14 @@ Ce widget permet d'insérer dans la page HTML une zone de saisie ainsi qu'un bou
 ## Fonctionnement du widget istexResults
 
 Ce widget permet d'insérer dans la page HTML la liste des résultats issus d'une recherche. Il a besoin donc besoin du widget istexSearch pour fonctionner. En effet, il se charge de capturer l'évènement "istex-results" puis de construire la liste des résultats à l'endroit souhaité dans la page HTML.
+
+## Fonctionnement du widget istexFacets
+
+Ce widget permet d'insérer dans la page HTML des facettes permettant d'affiner la recherche courante de l'utilisateur. A l'aide de la facette corpus, on peut ainsi n'afficher que les résultats provenant d'un éditeur précis.
+Les facettes actuellement gérées sont les suivantes :
+- corpus
+
+Il est possible de n'afficher que certaines facettes en modifiant le paramètre ``facetsToLoad`` dans istexConfig.
 
 ## Documentation développeurs
 
