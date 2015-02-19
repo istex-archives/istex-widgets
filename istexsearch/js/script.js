@@ -71,12 +71,15 @@
     $(self.elt).find('.istex-search-input').val(self.settings.query);
 
     // connect the submit action
-    $(self.elt).find('.istex-search-form').submit(function () {      
+    $(self.elt).find('.istex-search-form').submit(function () {
       var query = $(self.elt).find('input.istex-search-input').val().trim();
       query = query ? query : '*';
-      
+
+      // send the event telling a new search is sent
+      $.event.trigger(self.settings.newSearchEventName, [ self ]);
+
       self.execQuery({ q: query });
-      
+
       return false;
     }); // end of ('.istex-search-form').submit(
 
