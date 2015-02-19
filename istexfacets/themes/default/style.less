@@ -1,8 +1,8 @@
 .istex-facets {
   .istex-facets-title {
-//    font-size: small;
     padding: 0; margin: 0;
     text-align: center;
+    margin-bottom: 15px;
   }
 
   .istex-facet {
@@ -10,13 +10,21 @@
 
     .istex-facet-name {
       padding: 0; margin: 0;
-//      font-size: large;
-//      text-decoration: underline;
+      border-bottom: 1px solid #AAA;
+      padding-bottom: 5px;
+      margin-bottom: 5px;
     }
-    
+
     .istex-facet-corpus {
       padding: 0; margin: 0;
       list-style-type: none;
+
+      label {
+        display: block;
+      }
+      input {
+        margin-right: 8px;
+      }
 
       .istex-facet-corpus-badge {
         float: right;
@@ -29,7 +37,7 @@
         color: #FFF;
         background-color: #5A99B0;
         border-radius: 4px;
-      }    
+      }
     }
   }
 
