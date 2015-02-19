@@ -1,6 +1,7 @@
 var httpServer    = require('http-server');
 var Browser       = require('zombie');
 var istexApiFaker = require('istex-api-faker');
+//var istexApiFaker = require('../../../istex-api-faker/app.js');
 
 
 module.exports = function (done) {

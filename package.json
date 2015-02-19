@@ -36,7 +36,7 @@
     "gulp-strip-debug": "^1.0.2",
     "gulp-uglify": "^1.0.1",
     "http-server": "^0.7.3",
-    "istex-api-faker": "^1.5.6",
+    "istex-api-faker": "^1.5.7",
     "mocha": "^2.0.1",
     "mocha-jshint": "0.0.9",
     "zombie": "^2.4.0"
