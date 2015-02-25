@@ -399,7 +399,7 @@
    */
   Plugin.prototype.fixIstexAPILink = function (link) {
     var self = this;
-    return link.replace('https://api.istex.fr', self.settings.istexApi);
+    return link ? link.replace('https://api.istex.fr', self.settings.istexApi) : '';
   };
 
   /**
