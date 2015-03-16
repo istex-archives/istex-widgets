@@ -160,15 +160,14 @@
       var queryElasticSearchTime = '';
       queryTotalTime = (queryElapsedTime/1000).toFixed(2);
       if (results.stats) {
-          queryElasticSearchTime = 'Réseau : ' 
+          queryElasticSearchTime = 'Réseau : '
             + ((queryElapsedTime -
                 results.stats.elasticsearch.took -
-                results.stats['istex-data'].took -
                 results.stats['istex-rp'].took)/1000).toFixed(2) + ' sec'
             + ', Moteur de recherche : '
             + (results.stats.elasticsearch.took/1000).toFixed(2) + ' sec'
             + ', Traitements de l\'API : '
-            + ((results.stats['istex-data'].took + results.stats['istex-rp'].took)/1000).toFixed(2)
+            + (results.stats['istex-rp'].took/1000).toFixed(2)
             + ' sec';
         } else {
           queryElasticSearchTime = 'Statistiques détaillées non disponibles';
