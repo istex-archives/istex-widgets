@@ -2,8 +2,6 @@
 
 Widgets (auth, search, results, facets) permettant de créer rapidement des interface Web d'interrogation des ressources ISTEX.
 
-[![Build Status](https://travis-ci.org/istex/istex-widgets.svg?branch=master)](https://travis-ci.org/istex/istex-widgets)
-
 ## Usage classique des widgets
 
 Exemple d'utilisation classique des widgets search et results. Il est nécessaire dans un premier temps de charger les fichiers JS et CSS des widgets Istex (head de la page HTML) ainsi que la librairie jQuery qui est une dépendance nécessaire.
@@ -26,8 +24,8 @@ Voici ce que ca peut donner sur une page quasi vierge :
         // paramètres du widget (cf section plus bas)
       };
     </script>
-    <script type="text/javascript" src="//istex.github.io/latest/js/widgets.min.js"></script>
-    <link rel="stylesheet" href="//istex.github.io/latest/themes/default/widgets.min.css" />
+    <script type="text/javascript" src="//widgets.istex.fr/js/widgets.min.js"></script>
+    <link rel="stylesheet" href="//widgets.istex.fr/themes/default/widgets.min.css" />
 
     <style>
       #mysite-search, #mysite-results {
