@@ -384,7 +384,6 @@
           '</p>'
         );
         $(self.elt).fadeIn();
-        throw err;
       }
     });
 
