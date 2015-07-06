@@ -9,7 +9,7 @@ var istexConfigDefault = {
   query: "",
 
   // il est possible de ne charger que certaines facettes
-  facetsToLoad: [ 'corpus' ],
+  facetsToLoad: [ 'corpusName' ],
 
   // il est possible de cacher la zone de pagination avec ce paramètre
   showPagination: true,
