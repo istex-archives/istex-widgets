@@ -2,6 +2,12 @@
 
 > Ce module est obsolete, il est remplacé par celui ci : https://github.com/istex/istex-widgets-angular
 
+<div class="alert alert-info">
+
+**Note:** This is a note!
+
+</div>
+
 Widgets (auth, search, results, facets) permettant de créer rapidement des interface Web d'interrogation des ressources ISTEX.
 
 ## Usage classique des widgets
