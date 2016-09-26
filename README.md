@@ -1,8 +1,6 @@
 # Widgets ISTEX
 
-<aside class="warning">
-Ce code est obsolete, il est remplacé par celui ci : https://github.com/istex/istex-widgets-angular
-</aside>
+> Ce module est obsolete, il est remplacé par celui ci : https://github.com/istex/istex-widgets-angular
 
 Widgets (auth, search, results, facets) permettant de créer rapidement des interface Web d'interrogation des ressources ISTEX.
 
